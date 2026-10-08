@@ -2,13 +2,14 @@
 
 Setup (once):   pip install nflreadpy pandas scikit-learn pyarrow
 Run (weekly):   python td_model.py     (Wednesday, Friday and Sunday morning, so injury news is included)
-Output:         index.html (open in any browser) and td_picks.csv
+Output:         site/index.html (open in any browser), site/td_picks.csv and history.csv
 
 TD counts rushing and receiving TDs only (passing TDs and return TDs are not included).
 """
 import datetime as dt
 import html
 import math
+import os
 import sys
 
 import nflreadpy as nfl
@@ -42,7 +43,10 @@ PROPS = {
     "receiving_yards": ("Receiving yards", "yds", RECV, lambda d: d["targets_adj"] >= 2, "normal"),
     "receptions": ("Receptions", "rec", RECV, lambda d: d["targets_adj"] >= 2, "pois"),
 }
-TOP_TD, TOP_PROP = 60, 40
+TOP_TD, TOP_PROP, TOP_LONG = 60, 40, 50
+OUT_DIR = "site"          # the web page is written here
+HISTORY = "history.csv"   # every week's picks and results, kept so the Track record tab can grade them
+HCOLS = ["season", "week", "market", "player_id", "player", "team", "position", "value", "score", "naive", "actual", "void"]
 
 
 def lag(cols):
@@ -210,6 +214,11 @@ def score_of(ref, x):
     return np.searchsorted(np.sort(ref), x) / len(ref) * 100  # percentile vs. last season's predictions
 
 
+def logit(p):
+    p = np.clip(p, 1e-4, 1 - 1e-4)
+    return np.log(p / (1 - p)).reshape(-1, 1)
+
+
 def td_model(df, season):
     base_feats = lag(TD_STATS) + CTX + ["opp_td"] + POS
     feats = base_feats + INJ
@@ -226,17 +235,26 @@ def td_model(df, season):
     p0 = _lr().fit(tr[base_feats], tr["td"]).predict_proba(va[base_feats])[:, 1]
     inj_note = (f" Adding teammate-injury features moved the simple model's log loss from {log_loss(va['td'], p0):.4f} "
                 f"to {scores['logistic'][0]:.4f} (lower is better).")
-    v = va.assign(p=scores[best][2])
+
+    # Calibration: shrink overconfident probabilities using last season's out-of-sample predictions
+    raw = scores[best][2]
+    cal = LogisticRegression(C=1e6).fit(logit(raw), va["td"])
+
+    def fix(p):
+        return cal.predict_proba(logit(p))[:, 1]
+    adj = fix(raw)
+    v = va.assign(p=raw, pc=adj)
     top = v.sort_values("p", ascending=False).groupby(["season", "week"]).head(20)
-    cal = v.assign(bucket=pd.qcut(v["p"], 5, duplicates="drop"))
-    print(f"Calibration of '{best}' on {season - 1}:")
-    print(cal.groupby("bucket", observed=True).agg(predicted=("p", "mean"), actual=("td", "mean"), n=("td", "size")).round(3).to_string())
+    print(f"Top 20 each week: model said {top['p'].mean():.1%}, hit {top['td'].mean():.1%}; adjusted {top['pc'].mean():.1%}")
+
     model = MODELS[best]().fit(known[feats], known["td"])
     cand = d[d["td"].isna()].copy()
-    cand["prob"] = model.predict_proba(cand[feats])[:, 1]
-    cand["score"] = score_of(scores[best][2], cand["prob"])
-    note = (f"TD backtest on {season - 1}: log loss {scores[best][0]:.3f} vs {base:.3f} for guessing the average rate. "
-            f"Top 20 picks each week were given {top['p'].mean():.0%} on average and hit {top['td'].mean():.0%}." + inj_note)
+    cand["prob"] = fix(model.predict_proba(cand[feats])[:, 1])
+    cand["score"] = score_of(adj, cand["prob"])
+    note = (f"TD backtest on {season - 1}: log loss {log_loss(va['td'], adj):.3f} (raw {scores[best][0]:.3f}) vs {base:.3f} for "
+            f"guessing the average rate. Before adjusting, the top 20 picks each week were given {top['p'].mean():.0%} and hit "
+            f"{top['td'].mean():.0%}, so probabilities are now shrunk by that gap (top 20 now {top['pc'].mean():.0%}). "
+            f"That adjustment was fit on the same season, so the Track record tab is the real test." + inj_note)
     return cand, note
 
 
@@ -284,6 +302,12 @@ def prep(cand, status, sort_col):
 def american(p):
     p = min(0.99, max(0.01, p))
     return f"-{round(100 * p / (1 - p))}" if p >= 0.5 else f"+{round(100 * (1 - p) / p)}"
+
+
+def need_odds(p):
+    """Price at which a bet has +10% expected return if the model's probability is right."""
+    dec = 1.10 / min(max(p, 0.01), 0.99)
+    return f"+{round((dec - 1) * 100)}" if dec >= 2 else f"-{round(100 / (dec - 1))}"
 
 
 def side_text(spread):
@@ -337,6 +361,7 @@ def td_card(i, r):
     return (f"<article class='card' {attrs(r, 'td', f'data-p={r.prob:.4f}')}>" + head(i, r, f"{r.score:.0f}", f"score &middot; {r.prob * 100:.0f}% &middot; fair {american(r.prob)}")
             + f"<div class='chips'>{''.join(chips)}</div>"
             f"<p class='script'>Spread <b>{side_text(r.spread)}</b> Total <b>{r.total:g}</b> Implied <b>{r.implied:.1f} pts</b></p>"
+            f"<p class='script'>Worth a bet at <b>{need_odds(r.prob)}</b> or better (fair price plus a 10% cushion)</p>"
             "<label class='book'><input class='odds' placeholder='Sportsbook odds, e.g. +150' aria-label='Sportsbook odds'><span class='edge'></span></label>"
             f"<details><summary>Why this player</summary>{bars}</details></article>")
 
@@ -354,6 +379,8 @@ def prop_card(i, r, key):
     if r.spread >= 3:
         chips.append("<span class='chip'>Favored</span>")
     l4, l12 = getattr(r, f"{key}_l4"), getattr(r, f"{key}_l12")
+    if l12 > 0 and r.proj / l12 >= 1.15:
+        chips.append("<span class='chip'>Model above recent form</span>")
     why = (f"<p class='script'>Last 4 games average <b>{l4:.1f}</b> Last 12 average <b>{l12:.1f}</b></p>"
            f"<p class='script'>Defense allows <b>{opp:.2f}x</b> the usual {title.lower()} to {r.position}s</p>"
            f"<p class='script'>Spread <b>{side_text(r.spread)}</b> Total <b>{r.total:g}</b> Implied <b>{r.implied:.1f} pts</b></p>")
@@ -413,17 +440,62 @@ def team_block(team, t, ranks, a8, rk, pool, allc):
     return f"<h3>{team}</h3><ul>" + "".join(f"<li>{html.escape(s)}</li>" for s in items) + "</ul>"
 
 
-def game_cards(unplayed, tabs, pool, allc):
+def td_why(r):
+    w = []
+    if r.rz_rank <= 10:
+        w.append(f"top 10 red zone share ({r.rz_share_l4 * 100:.0f}% of team red zone touches)")
+    if r.gl_carries_l4 >= 1.0:
+        w.append(f"{r.gl_carries_l4:.1f} goal line carries a game")
+    w.append(f"{r.touches_l4:.1f} touches a game")
+    if boost(r):
+        w.append("teammate out, bigger role")
+    if r.opp_td >= 1.25:
+        w.append(f"defense allows {r.opp_td:.2f}x the usual TD scorers to {r.position}s")
+    if r.spread >= 3:
+        w.append(f"team favored by {r.spread:g}")
+    w.append(f"scored in {r.td_l12 * 100:.0f}% of last 12 games")
+    if r.status == "Questionable":
+        w.append("listed Questionable")
+    return "; ".join(w)
+
+
+def prop_why(r, key):
+    opp = getattr(r, f"opp_{key}")
+    w = [f"last 4 games average {getattr(r, key + '_l4'):.1f}"]
+    if opp >= 1.2:
+        w.append(f"soft matchup, defense allows {opp:.2f}x the usual")
+    elif opp <= 0.8:
+        w.append(f"tough matchup, defense allows {opp:.2f}x the usual")
+    if boost(r) and key in ("rushing_yards", "receiving_yards", "receptions"):
+        w.append("teammate out, bigger role")
+    if r.spread >= 3:
+        w.append(f"team favored by {r.spread:g}")
+    if r.status == "Questionable":
+        w.append("listed Questionable")
+    return "; ".join(w)
+
+
+def game_cards(unplayed, tabs, pool, allc, propc):
     t, ranks, a8, rk = tabs
     out = []
     for g in unplayed[unplayed["is_home"] == 1].sort_values("total", ascending=False).itertuples():
+        teams = [g.opp, g.team]
         fav = g.team if g.spread > 0 else g.opp
         line = "Pick'em" if g.spread == 0 else f"{fav} by {abs(g.spread):g}"
-        both = pool[pool["team"].isin([g.team, g.opp])].nlargest(3, "score")
-        best = ", ".join(f"{r.player} ({r.score:.0f})" for r in both.itertuples())
-        out.append(f"<details class='card' open><summary class='game'>{g.opp} @ {g.team}<span class='sub'>{line}, total {g.total:g}, "
-                   f"{g.team} {g.implied:.1f} - {g.opp} {g.total - g.implied:.1f}</span></summary>"
-                   f"<p class='script'>Top TD scores in this game: <b>{html.escape(best)}</b></p>"
+        tds = pool[pool["team"].isin(teams)].nlargest(5, "score")
+        lead = f"{tds.iloc[0].player} ({tds.iloc[0].score:.0f})" if len(tds) else "none"
+        td_items = "".join(f"<li><b>{html.escape(r.player)}</b> ({r.team} {r.position}) score {r.score:.0f}, {r.prob * 100:.0f}% chance, "
+                           f"fair {american(r.prob)}. {html.escape(td_why(r))}.</li>" for r in tds.itertuples())
+        prop_items = ""
+        for key, (title, unit, *_rest) in PROPS.items():
+            pr = propc[key]
+            for r in pr[pr["team"].isin(teams)].nlargest(2, "score").itertuples():
+                prop_items += (f"<li><b>{title}:</b> {html.escape(r.player)} ({r.team}) score {r.score:.0f}, projects {r.proj:.1f} {unit}. "
+                               f"{html.escape(prop_why(r, key))}.</li>")
+        out.append(f"<details class='card'><summary class='game'>{g.opp} @ {g.team}<span class='sub'>{line}, total {g.total:g}. "
+                   f"Top TD score: {html.escape(lead)}</span></summary>"
+                   f"<h3>Best touchdown scorers</h3><ul>{td_items or '<li>No qualifying players.</li>'}</ul>"
+                   f"<h3>Best props</h3><ul>{prop_items or '<li>No qualifying props.</li>'}</ul>"
                    + team_block(g.opp, t, ranks, a8, rk, pool, allc) + team_block(g.team, t, ranks, a8, rk, pool, allc) + "</details>")
     return "\n".join(out)
 
@@ -464,12 +536,13 @@ summary{cursor:pointer;color:var(--g);font-size:.9rem;padding:6px 0}summary.game
 ul{margin:0;padding-left:18px;font-size:.9rem}li{margin:4px 0}
 .bar{margin:8px 0}.bl{display:flex;justify-content:space-between;gap:8px;font-size:.88rem}.bl i{color:var(--mute);font-style:normal;text-align:right}
 .track{height:6px;background:var(--line);border-radius:3px;margin-top:4px;overflow:hidden}.track span{display:block;height:100%;background:var(--g)}
+table.rec{width:100%;border-collapse:collapse;font-size:.88rem}table.rec th,table.rec td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}table.rec th:first-child,table.rec td:first-child{text-align:left}table.rec th{color:var(--mute);font-weight:600}
 footer{color:var(--mute);font-size:.85rem;margin-top:14px}footer p{margin:6px 0}
 :focus-visible{outline:2px solid var(--g);outline-offset:2px}
 </style></head><body><main>
 <h1>Week __WEEK__ NFL picks</h1>
 <p class="meta">Season __SEASON__, built __BUILT__</p>
-<p class="note">Score runs 0 to 100 and shows how a player ranks against every player-game the model scored last season. Type a sportsbook's odds or line into a card to compare it with the model. Edges under about 3 points are within the margin of error. The model adjusts for teammates ruled Out or Doubtful on the official injury report, but it can't see game-day inactives announced later, so check them before kickoff.</p>
+<p class="note">Score runs 0 to 100 and shows how a player ranks against every player-game the model scored last season. Type a sportsbook's odds or line into a card to compare it with the model. On a touchdown card, expected return is what a $1 bet earns on average if the model is right. The model has error, so I'd want +10% or more, and extra caution on longshots. The model adjusts for teammates ruled Out or Doubtful on the official injury report, but it can't see game-day inactives announced later, so check them before kickoff.</p>
 <nav>__NAV__</nav>
 <div class="tools">
 <select id="pos" aria-label="Position"><option value="">All</option><option>RB</option><option>WR</option><option>TE</option><option>QB</option></select>
@@ -486,13 +559,13 @@ const pois=(k,m)=>{let s=0,t=Math.exp(-m);for(let i=0;i<=k;i++){s+=t;t*=m/(i+1)}
 function f(){const p=$('#pos').value,s=$('#q').value.toLowerCase();cards.forEach(c=>{c.hidden=!!(c.dataset.pos&&((p&&c.dataset.pos!==p)||(s&&!c.dataset.name.includes(s))))})}
 $('#pos').onchange=f;$('#q').oninput=f;
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
-document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.t);$('.tools').hidden=b.dataset.t==='games'});
+document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.t);$('.tools').hidden=['games','record'].includes(b.dataset.t)});
 cards.forEach(c=>{const i=c.querySelector('.odds,.line'),e=c.querySelector('.edge');if(!i)return;
 i.oninput=()=>{const k=c.dataset.kind;
 if(k==='td'){const o=parseInt(i.value.replace(/[^\d+-]/g,''),10);
 if(!o||Math.abs(o)<100){e.textContent='';e.className='edge';return}
-const imp=o>0?100/(o+100):-o/(-o+100),d=(+c.dataset.p-imp)*100;
-e.textContent='Edge '+(d>=0?'+':'')+d.toFixed(1)+' pts';e.className='edge '+(d>=3?'good':d>=0?'ok':'bad');return}
+const p=+c.dataset.p,dec=o>0?o/100+1:100/-o+1,ev=(p*dec-1)*100;
+e.textContent='Expected return '+(ev>=0?'+':'')+ev.toFixed(0)+'% per $1';e.className='edge '+(ev>=10?'good':ev>=0?'ok':'bad');return}
 const L=parseFloat(i.value),mu=+c.dataset.mu,sd=+c.dataset.sd;
 if(isNaN(L)){e.textContent='';return}
 const po=k==='pois'?1-pois(Math.floor(L),mu):1-Phi((L-mu)/sd);
@@ -511,12 +584,74 @@ def write_outputs(sections, td, week, season, notes, have_injuries):
     page = (TEMPLATE.replace("__WEEK__", str(week)).replace("__SEASON__", str(season))
             .replace("__BUILT__", dt.date.today().strftime("%B %d, %Y").replace(" 0", " "))
             .replace("__NAV__", nav).replace("__SECTIONS__", body).replace("__INFO__", info))
-    with open("index.html", "w", encoding="utf-8") as f:
+    os.makedirs(OUT_DIR, exist_ok=True)
+    with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(page)
     out = td[["player", "position", "team", "opp", "is_home", "score", "prob", "status", "touches_l4", "rz_touches_l4",
               "gl_carries_l4", "tgt_share_l4", "rz_share_l4", "opp_td", "spread", "total", "implied"]].copy()
     out["fair_odds"] = out["prob"].map(american)
-    out.to_csv("td_picks.csv", index=False)
+    out.to_csv(os.path.join(OUT_DIR, "td_picks.csv"), index=False)
+
+
+def pick_rows(season, week, market, frame, value_col, naive_col):
+    return pd.DataFrame({"season": season, "week": week, "market": market, "player_id": frame["player_id"].values,
+                         "player": frame["player"].values, "team": frame["team"].values, "position": frame["position"].values,
+                         "value": frame[value_col].values, "score": frame["score"].values, "naive": frame[naive_col].values,
+                         "actual": np.nan, "void": False})
+
+
+def update_history(new, season, teams, ps, ctx):
+    """Save this run's picks (replacing earlier runs for games not yet played; finished games stay frozen),
+    then fill in actual results for every pick whose game is over."""
+    try:
+        h = pd.read_csv(HISTORY)
+    except FileNotFoundError:
+        h = pd.DataFrame(columns=HCOLS)
+    drop = (h["season"] == season) & (h["week"] == new["week"].iloc[0]) & h["team"].isin(teams)
+    h = pd.concat([h[~drop], new], ignore_index=True)
+    h["actual"] = pd.to_numeric(h["actual"], errors="coerce")
+    act = ps.set_index(["season", "week", "player_id"])
+    act = act[~act.index.duplicated()]
+    for m in h["market"].unique():
+        sel = (h["market"] == m) & h["actual"].isna()
+        if sel.any():
+            keys = pd.MultiIndex.from_frame(h.loc[sel, ["season", "week", "player_id"]])
+            h.loc[sel, "actual"] = act["td" if m == "td_long" else m].reindex(keys).values
+    played = ctx[ctx["played"]].set_index(["season", "week", "team"]).index
+    h["void"] = pd.MultiIndex.from_frame(h[["season", "week", "team"]]).isin(played) & h["actual"].isna()  # game over, player didn't play
+    h[HCOLS].to_csv(HISTORY, index=False)
+    return h
+
+
+def record_html(h):
+    h = h.copy()
+    h["rank"] = h.groupby(["season", "week", "market"])["score"].rank(ascending=False, method="first")
+    g = h[h["actual"].notna()]
+    if g.empty:
+        return ("<div class='card'><p class='script'>No graded picks yet. After this week's games finish, the next run grades every pick "
+                "here: how often the top TD picks scored, and how far off the projections were. Results build up week by week.</p></div>")
+    td = g[g["market"] == "td"]
+    rows = "".join(
+        f"<tr><td>{s} W{w}</td><td>{x[x['rank'] <= 10]['value'].mean():.0%}</td><td>{x[x['rank'] <= 10]['actual'].mean():.0%}</td>"
+        f"<td>{x['value'].mean():.0%}</td><td>{x['actual'].mean():.0%}</td></tr>" for (s, w), x in td.groupby(["season", "week"]))
+    t10 = td[td["rank"] <= 10]
+    rows += (f"<tr><td><b>All weeks</b></td><td><b>{t10['value'].mean():.0%}</b></td><td><b>{t10['actual'].mean():.0%}</b></td>"
+             f"<td><b>{td['value'].mean():.0%}</b></td><td><b>{td['actual'].mean():.0%}</b></td></tr>") if len(td) else ""
+    ls = g[g["market"] == "td_long"]
+    ls_txt = (f"Longshot TD picks: the model said {ls['value'].mean():.0%}, {ls['actual'].mean():.0%} scored ({len(ls)} picks). " if len(ls) else "")
+    props = ""
+    for key, (title, unit, *_rest) in PROPS.items():
+        x = g[g["market"] == key]
+        if len(x):
+            props += (f"<tr><td>{title}</td><td>{len(x)}</td><td>{(x['actual'] - x['value']).abs().mean():.1f}</td>"
+                      f"<td>{(x['actual'] - x['naive']).abs().mean():.1f}</td></tr>")
+    return (f"<div class='card'><h3>Touchdown picks: what the model said vs what happened</h3>"
+            f"<table class='rec'><tr><th>Week</th><th>Top 10 said</th><th>Top 10 hit</th><th>All picks said</th><th>All picks hit</th></tr>{rows}</table>"
+            f"<p class='script'>Ten picks a week is a small sample, so one extra TD moves the hit rate 10 points. Look at the All weeks row once several weeks are in. "
+            f"If 'hit' keeps landing below 'said', trust the percentages less.</p></div>"
+            f"<div class='card'><h3>Props: average miss of the model vs just using the last 4 games</h3>"
+            f"<table class='rec'><tr><th>Prop</th><th>Picks</th><th>Model miss</th><th>Last 4 miss</th></tr>{props}</table></div>"
+            f"<p class='script'>{ls_txt}{int(h['void'].sum())} picks were voided because the player did not play. Picks are frozen once a game starts, using the last run before it.</p>")
 
 
 def main(season=None):
@@ -534,18 +669,43 @@ def main(season=None):
     pool["rz_rank"] = pool["rz_share_l4"].rank(ascending=False, method="min")
     for c in ["rz_share_l4", "touches_l4", "gl_carries_l4", "tgt_share_l4", "td_l12", "opp_td"]:
         pool["pct_" + c] = pool.groupby("position")[c].rank(pct=True, method="min")
+    pool["rank_all"] = np.arange(1, len(pool) + 1)
+    boosted = np.where(pool["position"] == "RB", pool["vac_carry"], np.where(pool["position"].isin(["WR", "TE"]), pool["vac_tgt"], 0)) >= 0.15
+    pool["signals"] = ((pool["rz_rank"] <= 10).astype(int) + (pool["gl_carries_l4"] >= 1.0) + (pool["spread"] >= 3)
+                       + (pool["opp_td"] >= 1.25) + boosted).astype(int)
     td = pool.head(TOP_TD)
-    sections = [("td", "Touchdowns", "".join(td_card(i, r) for i, r in enumerate(td.itertuples(), 1)))]
+    rest = pool.iloc[TOP_TD:]
+    long_td = rest[(rest["signals"] >= 1) & (rest["prob"] >= 0.04)].sort_values(["signals", "prob"], ascending=False).head(TOP_LONG)
+    td_section = ("td", "Touchdowns", "".join(td_card(i, r) for i, r in enumerate(td.itertuples(), 1)))
+    picks = [pick_rows(season, week, "td", td, "prob", "td_l12"), pick_rows(season, week, "td_long", long_td, "prob", "td_l12")]
+    long_html = ("<h3>Touchdown longshots</h3><p class='script'>Players outside the main list, ranked by how many positive signals they have "
+                 "(red zone share, goal line work, favored team, soft matchup, teammate out), then by model chance. The model can't see sportsbook odds, "
+                 "so use the price shown on each card: a longshot only has value if the book pays at least that much. Books usually keep a bigger margin "
+                 "on longshots, so real value here is rarer, and the model is least reliable for low-probability players.</p>"
+                 + "".join(td_card(r.rank_all, r) for r in long_td.itertuples()))
 
+    propc, prop_sections = {}, []
     for key, (title, *_rest) in PROPS.items():
         pc, pnote = prop_model(df, season, key)
-        pc = prep(pc, status, "score").head(TOP_PROP)
+        propc[key] = prep(pc, status, "score")
+        propc[key]["rank_all"] = np.arange(1, len(propc[key]) + 1)
+        top = propc[key].head(TOP_PROP)
+        extra = propc[key].iloc[TOP_PROP:]
+        lift = extra["proj"] / extra[f"{key}_l12"].replace(0, np.nan)
+        up = extra.assign(lift=lift)[lift >= 1.15].sort_values("lift", ascending=False).head(6)
+        if len(up):
+            long_html += (f"<h3>{title}: trending up</h3><p class='script'>Projected at least 15% above their last-12-game average. "
+                          f"Lines are often set off recent form, so compare the book's line with the projection.</p>"
+                          + "".join(prop_card(r.rank_all, r, key) for r in up.itertuples()))
         notes.append(pnote)
-        sections.append((key, title, "".join(prop_card(i, r, key) for i, r in enumerate(pc.itertuples(), 1))))
+        prop_sections.append((key, title, "".join(prop_card(i, r, key) for i, r in enumerate(top.itertuples(), 1))))
+        picks.append(pick_rows(season, week, key, top, "proj", f"{key}_l4"))
 
-    sections.append(("games", "Game cheat codes", game_cards(unplayed, team_tables(ctx, off, a), pool, allc)))
+    hist = update_history(pd.concat(picks, ignore_index=True), season, set(unplayed["team"]), ps, ctx)
+    games = ("games", "Games", game_cards(unplayed, team_tables(ctx, off, a), pool, allc, propc))
+    sections = [td_section, ("long", "Longshots", long_html), games] + prop_sections + [("record", "Track record", record_html(hist))]
     write_outputs(sections, td, week, season, notes, status is not None)
-    print(f"\nDone. Week {week} picks saved to index.html and td_picks.csv. Open index.html in your browser.")
+    print(f"\nDone. Week {week} picks saved to {OUT_DIR}/index.html. Open that file in your browser.")
 
 
 if __name__ == "__main__":
