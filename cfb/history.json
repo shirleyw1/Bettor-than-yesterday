@@ -1,0 +1,200 @@
+[
+ {
+  "k": "6|spread|401856825",
+  "week": 6,
+  "type": "spread",
+  "gid": 401856825,
+  "pick": "Houston +2.5",
+  "team": "Houston",
+  "line": 2.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|spread|401856827",
+  "week": 6,
+  "type": "spread",
+  "gid": 401856827,
+  "pick": "Utah -15.5",
+  "team": "Utah",
+  "line": -15.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|spread|401858480",
+  "week": 6,
+  "type": "spread",
+  "gid": 401858480,
+  "pick": "Michigan State +2.5",
+  "team": "Michigan State",
+  "line": 2.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|spread|401858481",
+  "week": 6,
+  "type": "spread",
+  "gid": 401858481,
+  "pick": "Nebraska +8.5",
+  "team": "Nebraska",
+  "line": 8.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|spread|401866440",
+  "week": 6,
+  "type": "spread",
+  "gid": 401866440,
+  "pick": "Massachusetts +5",
+  "team": "Massachusetts",
+  "line": 5.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|ml|401858480",
+  "week": 6,
+  "type": "ml",
+  "gid": 401858480,
+  "pick": "Michigan State +150",
+  "team": "Michigan State",
+  "line": null,
+  "ml": 150,
+  "result": null
+ },
+ {
+  "k": "6|ml|401858481",
+  "week": 6,
+  "type": "ml",
+  "gid": 401858481,
+  "pick": "Nebraska +270",
+  "team": "Nebraska",
+  "line": null,
+  "ml": 270,
+  "result": null
+ },
+ {
+  "k": "6|ml|401856825",
+  "week": 6,
+  "type": "ml",
+  "gid": 401856825,
+  "pick": "Houston +120",
+  "team": "Houston",
+  "line": null,
+  "ml": 120,
+  "result": null
+ },
+ {
+  "k": "6|td|401858482|Joseph Himon II",
+  "week": 6,
+  "type": "td",
+  "gid": 401858482,
+  "pick": "Joseph Himon II",
+  "team": "Northwestern",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401862796|Jahiem White",
+  "week": 6,
+  "type": "td",
+  "gid": 401862796,
+  "pick": "Jahiem White",
+  "team": "North Texas",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401858483|Jeremiah Smith",
+  "week": 6,
+  "type": "td",
+  "gid": 401858483,
+  "pick": "Jeremiah Smith",
+  "team": "Ohio State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401858482|Aidan Chiles",
+  "week": 6,
+  "type": "td",
+  "gid": 401858482,
+  "pick": "Aidan Chiles",
+  "team": "Northwestern",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401856827|Wayshawn Parker",
+  "week": 6,
+  "type": "td",
+  "gid": 401856827,
+  "pick": "Wayshawn Parker",
+  "team": "Utah",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401856714|Jadan Baugh",
+  "week": 6,
+  "type": "td",
+  "gid": 401856714,
+  "pick": "Jadan Baugh",
+  "team": "Florida",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401864516|Liam Szarka",
+  "week": 6,
+  "type": "td",
+  "gid": 401864516,
+  "pick": "Liam Szarka",
+  "team": "Air Force",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401858255|Nate Sheppard",
+  "week": 6,
+  "type": "td",
+  "gid": 401858255,
+  "pick": "Nate Sheppard",
+  "team": "Duke",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401856823|Michael Hawkins Jr.",
+  "week": 6,
+  "type": "td",
+  "gid": 401856823,
+  "pick": "Michael Hawkins Jr.",
+  "team": "West Virginia",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "6|td|401860902|Jesse Legree",
+  "week": 6,
+  "type": "td",
+  "gid": 401860902,
+  "pick": "Jesse Legree",
+  "team": "Oregon State",
+  "line": null,
+  "ml": null,
+  "result": null
+ }
+]
