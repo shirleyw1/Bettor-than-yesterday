@@ -1,0 +1,2 @@
+# One player name per line, exactly as the site shows it. Players listed here are
+# removed and their teammates' touchdown odds go up. Lines starting with # are ignored.
