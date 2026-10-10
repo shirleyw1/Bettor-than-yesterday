@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CFB Picks</title>
+<style>
+:root{--bg:#0d1912;--pn:#13261b;--ln:#244433;--tx:#e7f0e9;--mu:#8ea898;--ac:#e9d758;--w:#5fd388;--l:#e8675d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+main{max-width:680px;margin:0 auto;padding:16px}
+h1{font:700 28px/1 "Avenir Next Condensed","Arial Narrow",system-ui,sans-serif;margin:8px 0 4px}
+.sub{color:var(--mu);font-size:13px;margin:0 0 14px}
+nav{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--ln);margin-bottom:6px}
+nav button{background:none;border:0;color:var(--mu);font:inherit;padding:10px 12px;white-space:nowrap;border-bottom:3px solid transparent}
+nav button.on{color:var(--tx);border-color:var(--ac)}
+nav button:focus-visible{outline:2px solid var(--ac)}
+h2{font-size:15px;color:var(--mu);font-weight:600;margin:22px 0 4px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0 12px 12px;border-bottom:1px solid var(--ln);border-left:3px solid var(--ac)}
+.row b{display:block}.row small{color:var(--mu)}
+.n{font:700 24px/1 "Avenir Next Condensed","Arial Narrow",system-ui,sans-serif;color:var(--ac);text-align:right;white-space:nowrap}
+.n small{display:block;font:12px system-ui;color:var(--mu)}
+.W{color:var(--w)}.L{color:var(--l)}
+table{width:100%;border-collapse:collapse}td,th{padding:10px 4px;border-bottom:1px solid var(--ln);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--mu);font-weight:600;font-size:13px}
+.empty,.note{color:var(--mu);font-size:14px}.note{margin-top:20px;border-top:1px solid var(--ln);padding-top:12px}
+ul{margin:6px 0 0;padding-left:18px;color:var(--mu);font-size:14px}
+</style></head><body><main>
+<h1>College Football Picks</h1><p class="sub" id="sub">Loading…</p>
+<nav id="nav"></nav><div id="v"></div>
+<p class="note">A simple model with free data, not a crystal ball. Sportsbook lines are sharp, so treat every pick as a small edge at best. Bet only what you can lose.</p>
+</main><script>
+const TABS=['Picks','Touchdowns','Cheat codes','Track record'];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const when=s=>new Date(s).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'});
+const get=u=>fetch(u+'?t='+Date.now()).then(r=>r.ok?r.json():Promise.reject());
+const row=(t,s,n,sn)=>`<div class="row"><div><b>${esc(t)}</b><small>${esc(s)}</small></div><div class="n">${esc(n)}<small>${esc(sn)}</small></div></div>`;
+const none='<p class="empty">Nothing clears the bar this week. Skipping is a valid pick.</p>';
+let D,H,tab=0;
+function rec(){return ['spread','ml','td'].map(t=>{const a=H.filter(p=>p.type===t),x=a.filter(p=>p.result),w=x.filter(p=>p.result==='W').length,l=x.filter(p=>p.result==='L').length;
+ let u=null;if(t==='spread')u=x.reduce((s,p)=>s+(p.result==='W'?.91:p.result==='L'?-1:0),0);
+ if(t==='ml')u=x.reduce((s,p)=>s+(p.result==='W'?(p.ml>0?p.ml/100:100/-p.ml):p.result==='L'?-1:0),0);
+ return {t:{spread:'Spread',ml:'Moneyline',td:'Anytime TD'}[t],w,l,pend:a.length-x.length,u}})}
+function draw(){
+ document.querySelectorAll('nav button').forEach((b,i)=>b.classList.toggle('on',i===tab));
+ let h='';
+ if(tab===0){h='<h2>Spread</h2>'+(D&&D.spread.length?D.spread.map(x=>row(x.pick,x.game+' · '+when(x.start),'+'+x.edge,'pts of edge')).join(''):none)+
+  '<h2>Moneyline</h2>'+(D&&D.ml.length?D.ml.map(x=>row(x.pick,x.game+' · '+when(x.start),'+'+x.ev+'%','value, model '+x.p+'% to win')).join(''):none)}
+ if(tab===1){h='<h2>Most likely to score</h2>'+(D&&D.td.length?D.td.map(x=>row(x.player,x.team+' · '+x.game,x.p+'%','fair price '+x.fair)).join(''):none)+
+  '<p class="note">Compare the fair price to your book. If the book pays more than the fair price, that is the value. If a player is out, add his name to cfb/out.txt and his teammates move up.</p>'}
+ if(tab===2){h=D&&D.cheats.length?D.cheats.map(c=>`<h2>${esc(c.game)} · ${esc(c.line||'')}${c.total?' · O/U '+c.total:''}</h2><ul>${c.codes.map(k=>'<li>'+esc(k)+'</li>').join('')}</ul>`).join(''):'<p class="empty">No game stands out this week.</p>'}
+ if(tab===3){const r=rec();h='<table><tr><th></th><th>Record</th><th>Units</th><th>Open</th></tr>'+r.map(x=>`<tr><td>${x.t}</td><td>${x.w}-${x.l}</td><td class="${x.u>0?'W':x.u<0?'L':''}">${x.u==null?'n/a':(x.u>0?'+':'')+x.u.toFixed(1)}</td><td>${x.pend}</td></tr>`).join('')+'</table>'+
+  '<p class="note">Spread units assume -110. Moneyline units use the listed price. TD picks have no price here, so only the record counts. Picks are saved the first time they appear and never edited.</p>'+
+  '<h2>Latest results</h2>'+(H.filter(p=>p.result).slice(-12).reverse().map(p=>row(p.pick,'Week '+p.week+' · '+p.type,p.result,'')).join('')||'<p class="empty">Results show up after the first games finish.</p>')}
+ document.getElementById('v').innerHTML=h}
+document.getElementById('nav').innerHTML=TABS.map((t,i)=>`<button onclick="tab=${i};draw()">${t}</button>`).join('');
+Promise.all([get('data.json').catch(()=>null),get('history.json').catch(()=>[])]).then(([d,h])=>{D=d;H=h||[];
+ document.getElementById('sub').textContent=D?`Week ${D.week} · updated ${new Date(D.updated).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`:'No data yet. Run the workflow once from the Actions tab.';
+ if(!D)D={spread:[],ml:[],td:[],cheats:[]};draw()});
+</script></body></html>
