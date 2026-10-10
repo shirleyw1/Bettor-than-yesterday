@@ -196,5 +196,16 @@
   "line": null,
   "ml": null,
   "result": null
+ },
+ {
+  "k": "6|spread|401856717",
+  "week": 6,
+  "type": "spread",
+  "gid": 401856717,
+  "pick": "Texas -7.5",
+  "team": "Texas",
+  "line": -7.5,
+  "ml": null,
+  "result": null
  }
 ]
