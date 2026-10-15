@@ -20,6 +20,8 @@ import nflreadpy as nfl
 import numpy as np
 import pandas as pd
 from scipy.stats import norm, poisson
+import warnings
+warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor, VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import brier_score_loss, log_loss
@@ -30,7 +32,7 @@ POSITIONS = ["QB", "RB", "WR", "TE"]
 WINDOWS = (4, 12)
 BASE = ["carries", "targets", "rz_carries", "gl_carries", "rz_targets", "td", "carry_share", "tgt_share",
         "rz_share", "gl_share", "attempts", "passing_yards", "passing_tds", "rushing_yards",
-        "receiving_yards", "receptions"]
+        "receiving_yards", "receptions", "xtd", "tdc"]
 OPP = ["td", "passing_yards", "passing_tds", "rushing_yards", "receiving_yards", "receptions"]
 CTX = ["implied", "spread", "total", "is_home"]
 POS = [f"pos_{p}" for p in POSITIONS]
@@ -54,6 +56,9 @@ ODDS_CACHE = "odds_cache.json"   # sportsbook prices, fetched once a week and re
 ODDS_MARKETS = {"player_anytime_td": "td", "player_pass_yds": "passing_yards", "player_pass_tds": "passing_tds",
                 "player_rush_yds": "rushing_yards", "player_reception_yds": "receiving_yards", "player_receptions": "receptions"}
 BLEND = 0.5               # value counts only this share of the gap between the model and the market
+PICK_CHANCE = 0.7         # pick score = 70% how likely he is to hit + 30% how good the price is
+ZONES = ["gl", "rz", "fr", "of"]   # goal line, red zone, fringe, open field
+ZONE_RATES = {}           # league-wide TD rate per carry ("c") and per target ("t") in each zone
 VIG_ALLOW = 1.10          # allowance for the sportsbook's margin on touchdown prices
 INJ_FEED = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries"
 OUT_FILE = "out.txt"      # optional: names (one per line) you want treated as Out
@@ -62,6 +67,10 @@ ROSTER_OUT = {"RES": "on injured reserve", "INA": "inactive", "CUT": "released",
               "PUP": "PUP list", "SUS": "suspended", "EXE": "exempt list", "RET": "retired"}
 HISTORY = "history.csv"   # every week's picks and results, kept so the Track record tab can grade them
 HCOLS = ["season", "week", "market", "player_id", "player", "team", "position", "value", "score", "naive", "actual", "void", "dec", "side", "point"]
+
+
+def zone_of(y):
+    return np.select([y <= 5, y <= 20, y <= 40], ["gl", "rz", "fr"], "of")
 
 
 def lag(cols):
@@ -104,9 +113,10 @@ def load_data(season):
     ps["td"] = ((ps["rushing_tds"].fillna(0) + ps["receiving_tds"].fillna(0)) > 0).astype(int)
     raw = ["carries", "targets", "attempts", "passing_yards", "passing_tds", "rushing_yards", "receiving_yards", "receptions"]
     ps[raw] = ps[raw].fillna(0)
-    ps = ps[["player_id", "player", "position", "team", "td"] + keys + raw]
+    ps["tdc"] = ps["rushing_tds"].fillna(0) + ps["receiving_tds"].fillna(0)
+    ps = ps[["player_id", "player", "position", "team", "td", "tdc"] + keys + raw]
 
-    cols = keys + ["season_type", "play_type", "yardline_100", "posteam", "rusher_player_id", "receiver_player_id"]
+    cols = keys + ["season_type", "play_type", "yardline_100", "posteam", "rusher_player_id", "receiver_player_id", "rush_touchdown", "pass_touchdown"]
     pbp = nfl.load_pbp(seasons).select(cols).to_pandas()
     pbp = pbp[pbp["season_type"] == "REG"]
     run, air = pbp[pbp["play_type"] == "run"], pbp[pbp["play_type"] == "pass"]
@@ -117,6 +127,19 @@ def load_data(season):
            .groupby(keys + ["receiver_player_id"])[["rz_targets"]].sum()
            .reset_index().rename(columns={"receiver_player_id": "player_id"}))
     ps = ps.merge(rush, on=keys + ["player_id"], how="left").merge(rec, on=keys + ["player_id"], how="left")
+    # Expected TDs: how often a carry or a target in each part of the field becomes a TD, league-wide
+    run_z = run.assign(zone=zone_of(run["yardline_100"]))
+    tgt = air[air["receiver_player_id"].notna()]
+    tgt_z = tgt.assign(zone=zone_of(tgt["yardline_100"]))
+    ZONE_RATES["c"] = run_z.groupby("zone")["rush_touchdown"].mean().reindex(ZONES).fillna(0).to_dict()
+    ZONE_RATES["t"] = tgt_z.groupby("zone")["pass_touchdown"].mean().reindex(ZONES).fillna(0).to_dict()
+    for who, frame, idcol in [("c", run_z, "rusher_player_id"), ("t", tgt_z, "receiver_player_id")]:
+        cnt = frame.groupby(keys + [idcol, "zone"]).size().unstack(fill_value=0).reindex(columns=ZONES, fill_value=0)
+        cnt.columns = [f"{who}z_{z}" for z in ZONES]
+        ps = ps.merge(cnt.reset_index().rename(columns={idcol: "player_id"}), on=keys + ["player_id"], how="left")
+    zc = [f"{w}z_{z}" for w in "ct" for z in ZONES]
+    ps[zc] = ps[zc].fillna(0)
+    ps["xtd"] = sum(ps[f"cz_{z}"] * ZONE_RATES["c"][z] + ps[f"tz_{z}"] * ZONE_RATES["t"][z] for z in ZONES)
     for c in ["rz_carries", "gl_carries", "rz_targets"]:
         ps[c] = ps[c].fillna(0)
     ps["rz"] = ps["rz_carries"] + ps["rz_targets"]
@@ -211,6 +234,12 @@ def build_features(ps, ctx, a, season, week, unplayed, status, roster_team):
         for w in WINDOWS:
             df[f"{c}_l{w}"] = s.groupby(df["player_id"]).rolling(w, min_periods=1).mean().reset_index(level=0, drop=True)
     df["n_prior"] = df.groupby("player_id").cumcount()
+    for c in ["xtd", "tdc"] + [f"{w}z_{z}" for w in "ct" for z in ZONES]:  # last-8-game totals for the cheat code
+        s8 = df.groupby("player_id")[c].shift(1)
+        df[f"{c}_s8"] = s8.groupby(df["player_id"]).rolling(8, min_periods=1).sum().reset_index(level=0, drop=True)
+    df["debt8"] = df["xtd_s8"] - df["tdc_s8"]  # positive: his touches say he should have scored more
+    blocks = (df.groupby("player_id")["td"].shift(1) == 1).groupby(df["player_id"]).cumsum()
+    df["since_td"] = df.groupby([df["player_id"], blocks]).cumcount()
     for c, v in [("spread", 0.0), ("total", 45.0), ("implied", 22.5), ("is_home", 0)] + [(f"opp_{o}", 1.0) for o in OPP] + [(c, 0.0) for c in INJ[:4]]:
         df[c] = df[c].fillna(v)
     for p in POSITIONS:
@@ -238,7 +267,8 @@ def logit(p):
 
 def td_model(df, season):
     base_feats = lag(TD_STATS) + CTX + ["opp_td"] + POS
-    feats = base_feats + INJ
+    new_feats = lag(["xtd", "tdc"]) + ["debt8", "since_td"]
+    feats = base_feats + INJ + new_feats
     d = df[df["touches_adj"] >= 2.0]
     known = d[d["td"].notna()]
     tr, va = known[known["season"] < season - 1], known[known["season"] == season - 1]
@@ -249,9 +279,12 @@ def td_model(df, season):
         scores[name] = (log_loss(va["td"], p), brier_score_loss(va["td"], p), p)
         print(f"TD {name:9s} log loss {scores[name][0]:.4f}  brier {scores[name][1]:.4f}  (average-rate baseline {base:.4f})")
     best = min(scores, key=lambda k: scores[k][0])
-    p0 = _lr().fit(tr[base_feats], tr["td"]).predict_proba(va[base_feats])[:, 1]
-    inj_note = (f" Adding teammate-injury features moved the simple model's log loss from {log_loss(va['td'], p0):.4f} "
-                f"to {scores['logistic'][0]:.4f} (lower is better).")
+
+    def lr_loss(cols):
+        return log_loss(va["td"], _lr().fit(tr[cols], tr["td"]).predict_proba(va[cols])[:, 1])
+    l0, l1, l2 = lr_loss(base_feats), lr_loss(base_feats + INJ), lr_loss(feats)
+    inj_note = (f" Simple-model check (lower log loss is better): teammate-injury features {l0:.4f} to {l1:.4f}; "
+                f"expected-TD and 'due' features {l1:.4f} to {l2:.4f}.")
 
     # Calibration: shrink overconfident probabilities using last season's out-of-sample predictions
     raw = scores[best][2]
@@ -373,7 +406,7 @@ def vscore(ev):
 
 def _value_cols(df):
     df = df.copy()
-    for c in ["vscore", "ev", "price", "dec", "point"]:
+    for c in ["vscore", "ev", "price", "dec", "point", "pwin"]:
         df[c] = np.nan
     df["book"], df["side"] = "", ""
     return df
@@ -393,7 +426,9 @@ def add_td_value(df, odds):
                 ev = ((1 - BLEND) * df.at[i, "prob"] + BLEND * (1 / d) / VIG_ALLOW) * d - 1
                 for c, v in [("price", price), ("dec", d), ("ev", ev), ("vscore", vscore(ev)), ("book", book), ("side", "Yes")]:
                     df.at[i, c] = v
-    df["rank_score"] = df["vscore"].fillna(-1) if odds else df["score"]
+    # Pick score: mostly how likely he is to score, partly how good the price is
+    df["pick"] = np.where(df["vscore"].notna(), PICK_CHANCE * df["score"] + (1 - PICK_CHANCE) * df["vscore"], df["score"])
+    df["rank_score"] = df["pick"]
     return df
 
 
@@ -419,12 +454,15 @@ def add_prop_value(df, odds, key, dist):
                     push, win = 0.0, (over if side == "Over" else 1 - over)
                 ev = win * (d - 1) - (1 - win - push)
                 if best is None or ev > best[0]:
-                    best = (ev, side, point, price, d, book)
+                    best = (ev, side, point, price, d, book, win)
             if best:
-                ev, side, point, price, d, book = best
-                for c, v in [("ev", ev), ("vscore", vscore(ev)), ("price", price), ("dec", d), ("point", point), ("book", book), ("side", side)]:
+                ev, side, point, price, d, book, win = best
+                for c, v in [("ev", ev), ("vscore", vscore(ev)), ("price", price), ("dec", d), ("point", point), ("book", book),
+                             ("side", side), ("pwin", win)]:
                     df.at[i, c] = v
-    df["rank_score"] = df["vscore"].fillna(-1) if odds else df["score"]
+    chance = ((df["pwin"] - 0.40) / 0.30 * 100).clip(0, 100)   # 40% to hit scores 0, 70% scores 100
+    df["pick"] = np.where(df["vscore"].notna(), 0.5 * chance + 0.5 * df["vscore"], df["score"])
+    df["rank_score"] = df["pick"]
     return df
 
 
@@ -564,18 +602,20 @@ def money(price):
 
 def td_head(r):
     if has_value(r):
-        return f"{r.vscore:.0f}", f"value &middot; {r.prob * 100:.0f}% chance &middot; {money(r.price)} {html.escape(r.book)} &middot; return {r.ev * 100:+.0f}%"
+        return (f"{r.pick:.0f}", f"pick score &middot; {r.prob * 100:.0f}% chance &middot; value {r.vscore:.0f} "
+                f"({money(r.price)} {html.escape(r.book)})")
     return f"{r.score:.0f}", f"score &middot; {r.prob * 100:.0f}% &middot; fair {american(r.prob)}"
 
 
 def prop_head(r, unit):
     if has_value(r):
-        return f"{r.vscore:.0f}", f"value &middot; {r.side} {r.point:g} at {money(r.price)} ({html.escape(r.book)}) &middot; projects {r.proj:.1f} {unit}"
+        return (f"{r.pick:.0f}", f"pick score &middot; {r.side} {r.point:g} at {money(r.price)} ({html.escape(r.book)}) "
+                f"&middot; {r.pwin * 100:.0f}% to hit &middot; value {r.vscore:.0f}")
     return f"{r.score:.0f}", f"score &middot; projects {r.proj:.1f} {unit}"
 
 
 def shown(r):
-    return f"value {r.vscore:.0f}" if has_value(r) else f"score {r.score:.0f}"
+    return f"pick {r.pick:.0f}" if has_value(r) else f"score {r.score:.0f}"
 
 
 def bet_text(r):
@@ -595,35 +635,63 @@ TD_BARS = [("Red zone role", "rz_share_l4", lambda r: f"{r.rz_share_l4 * 100:.0f
            ("Matchup", "opp_td", lambda r: f"defense allows {r.opp_td:.2f}x the usual TD scorers to {r.position}s")]
 
 
+def tag_reasons(r):
+    t = []
+    if r.rz_rank <= 10:
+        t.append(("Top 10 red zone share", f"{r.rz_share_l4 * 100:.0f}% of his team's red zone touches, {nth(r.rz_rank)} among the players listed"))
+    if r.gl_carries_l4 >= 1.0:
+        t.append(("Goal line work", f"{r.gl_carries_l4:.1f} goal line carries a game"))
+    if r.spread >= 3:
+        t.append(("Favored", f"his team is favored by {r.spread:g}, which means more scoring chances"))
+    if r.opp_td >= 1.25:
+        t.append((f"Soft matchup vs {r.position}", f"the defense has allowed {r.opp_td:.2f}x the usual TD scorers to {r.position}s over 8 games"))
+    if r.opp_td <= 0.75:
+        t.append(("Tough matchup", f"the defense has allowed only {r.opp_td:.2f}x the usual TD scorers to {r.position}s"))
+    if r.total >= 48:
+        t.append(("High scoring game", f"the game total is {r.total:g}"))
+    if boost(r):
+        t.append(("Role boost: teammate out", "a teammate who carried part of the offense is out"))
+    if r.debt8 >= 1.0:
+        t.append(("Due", f"his touches suggest {r.xtd_s8:.1f} TDs over 8 games, but he scored {r.tdc_s8:.0f}"))
+    if r.debt8 <= -1.0:
+        t.append(("Regression risk", f"he scored {r.tdc_s8:.0f} TDs over 8 games on touches worth {r.xtd_s8:.1f}"))
+    return t
+
+
+def cheat_html(r):
+    names = {"gl": "Goal line (in 5)", "rz": "Red zone (6-20)", "fr": "Fringe (21-40)", "of": "Open field"}
+    rows = ""
+    for z in ZONES:
+        c, tg = getattr(r, f"cz_{z}_s8"), getattr(r, f"tz_{z}_s8")
+        rows += f"<tr><td>{names[z]}</td><td>{c:.0f}</td><td>{tg:.0f}</td><td>{c * ZONE_RATES['c'][z] + tg * ZONE_RATES['t'][z]:.2f}</td></tr>"
+    verdict = "due to convert" if r.debt8 >= 1.0 else ("scored more than his touches suggest" if r.debt8 <= -1.0 else "about what his touches suggest")
+    return (f"<h4>Cheat code (last 8 games)</h4><p class='script'>Expected TDs <b>{r.xtd_s8:.1f}</b> Scored <b>{r.tdc_s8:.0f}</b> "
+            f"TD debt <b>{r.debt8:+.1f}</b> ({verdict}) Games since a TD <b>{r.since_td:.0f}</b></p>"
+            f"<table class='rec'><tr><th>Zone</th><th>Carries</th><th>Targets</th><th>xTD</th></tr>{rows}</table>")
+
+
 def td_card(i, r):
     chips = []
     if r.status == "Questionable":
         chips.append("<span class='chip warn'>Questionable</span>")
     if stale(r):
         chips.append(stale(r))
-    if boost(r):
-        chips.append("<span class='chip'>Role boost: teammate out</span>")
-    if r.rz_rank <= 10:
-        chips.append("<span class='chip'>Top 10 red zone share</span>")
-    if r.gl_carries_l4 >= 1.0:
-        chips.append("<span class='chip'>Goal line work</span>")
-    if r.spread >= 3:
-        chips.append("<span class='chip'>Favored</span>")
-    if r.opp_td >= 1.25:
-        chips.append(f"<span class='chip'>Soft matchup vs {r.position}</span>")
-    if r.opp_td <= 0.75:
-        chips.append("<span class='chip dim'>Tough matchup</span>")
-    if r.total >= 48:
-        chips.append("<span class='chip'>High scoring game</span>")
+    tags = tag_reasons(r)
+    for label, _why in tags:
+        cls = "warn" if label == "Regression risk" else ("dim" if label == "Tough matchup" else "")
+        chips.append(f"<span class='chip {cls}'>{label}</span>")
     bars = "".join(
         f"<div class='bar'><div class='bl'><span>{lab}</span><i>{fmt(r)}</i></div><div class='track'><span style='width:"
         f"{0 if getattr(r, col) <= 0 else getattr(r, 'pct_' + col) * 100:.0f}%'></span></div></div>" for lab, col, fmt in TD_BARS)
+    reasons = "".join(f"<li><b>{label}</b>: {html.escape(why)}.</li>" for label, why in tags) or "<li>No tags fired.</li>"
+    pace = f" Pace <b>{nth(r.pace_rank)} of {r.pace_n:.0f}</b>" if getattr(r, "pace_rank", float("nan")) == getattr(r, "pace_rank", float("nan")) else ""
     return (f"<article class='card' {attrs(r, 'td', f'data-p={r.prob:.4f}')}>" + head(i, r, *td_head(r))
             + f"<div class='chips'>{''.join(chips)}</div>"
-            f"<p class='script'>Spread <b>{side_text(r.spread)}</b> Total <b>{r.total:g}</b> Implied <b>{r.implied:.1f} pts</b></p>"
+            f"<p class='script'>Spread <b>{side_text(r.spread)}</b> Total <b>{r.total:g}</b> Implied <b>{r.implied:.1f} pts</b>{pace}</p>"
             f"<p class='script'>Worth a bet at <b>{need_odds(r.prob)}</b> or better (fair price plus a 10% cushion)</p>"
             "<label class='book'><input class='odds' placeholder='Sportsbook odds, e.g. +150' aria-label='Sportsbook odds'><span class='edge'></span></label>"
-            f"<details><summary>Why this player</summary>{bars}</details></article>")
+            f"<details><summary>Why this player</summary><h4>Why the tags fired</h4><ul>{reasons}</ul>{cheat_html(r)}"
+            f"<h4>Profile</h4>{bars}</details></article>")
 
 
 def prop_card(i, r, key):
@@ -643,7 +711,8 @@ def prop_card(i, r, key):
     l4, l12 = getattr(r, f"{key}_l4"), getattr(r, f"{key}_l12")
     if l12 > 0 and r.proj / l12 >= 1.15:
         chips.append("<span class='chip'>Model above recent form</span>")
-    why = (f"<p class='script'>Last 4 games average <b>{l4:.1f}</b> Last 12 average <b>{l12:.1f}</b></p>"
+    why = (f"<p class='script'>Model projection <b>{r.proj:.1f} {unit}</b></p>"
+           f"<p class='script'>Last 4 games average <b>{l4:.1f}</b> Last 12 average <b>{l12:.1f}</b></p>"
            f"<p class='script'>Defense allows <b>{opp:.2f}x</b> the usual {title.lower()} to {r.position}s</p>"
            f"<p class='script'>Spread <b>{side_text(r.spread)}</b> Total <b>{r.total:g}</b> Implied <b>{r.implied:.1f} pts</b></p>")
     return (f"<article class='card' {attrs(r, dist, f'data-mu={r.proj:.3f} data-sd={r.sd:.3f}')}>" + head(i, r, *prop_head(r, unit))
@@ -737,7 +806,29 @@ def prop_why(r, key):
     return "; ".join(w)
 
 
-def game_cards(unplayed, tabs, pool, allc, propc):
+def allowed_table(team, a, ctx, rk):
+    cols = ["RB", "WR", "TE", "QB"]
+    g = ctx[(ctx["team"] == team) & ctx["played"]].sort_values(["season", "week"]).tail(8)
+    x = (a[a["opp"] == team].pivot_table(index=["season", "week"], columns="position", values="td", aggfunc="sum")
+         .reindex(columns=cols).fillna(0))
+    body, tot = "", dict.fromkeys(cols, 0)
+    for r in g.itertuples():
+        vals = [x.loc[(r.season, r.week), p] if (r.season, r.week) in x.index else 0 for p in cols]
+        tot = {p: tot[p] + v for p, v in zip(cols, vals)}
+        body += f"<tr><td>'{str(r.season)[2:]} W{r.week} {r.opp}</td>" + "".join(f"<td>{v:.0f}</td>" for v in vals) + "</tr>"
+    ranks = []
+    for p in cols:
+        try:
+            ranks.append(nth(rk.loc[(team, p), "td"]))
+        except KeyError:
+            ranks.append("")
+    body += "<tr><td><b>Total</b></td>" + "".join(f"<td><b>{tot[p]:.0f}</b></td>" for p in cols) + "</tr>"
+    body += "<tr><td>Rank (1st allows most)</td>" + "".join(f"<td>{k}</td>" for k in ranks) + "</tr>"
+    return (f"<h4>TD scorers allowed by {team}, last 8 games</h4><table class='rec'><tr><th>Game</th>"
+            + "".join(f"<th>{p}</th>" for p in cols) + f"</tr>{body}</table>")
+
+
+def game_cards(unplayed, tabs, pool, allc, propc, a, ctx):
     t, ranks, a8, rk = tabs
     out = []
     for g in unplayed[unplayed["is_home"] == 1].sort_values("total", ascending=False).itertuples():
@@ -758,7 +849,8 @@ def game_cards(unplayed, tabs, pool, allc, propc):
                    f"Top TD score: {html.escape(lead)}</span></summary>"
                    f"<h3>Best touchdown scorers</h3><ul>{td_items or '<li>No qualifying players.</li>'}</ul>"
                    f"<h3>Best props</h3><ul>{prop_items or '<li>No qualifying props.</li>'}</ul>"
-                   + team_block(g.opp, t, ranks, a8, rk, pool, allc) + team_block(g.team, t, ranks, a8, rk, pool, allc) + "</details>")
+                   + team_block(g.opp, t, ranks, a8, rk, pool, allc) + allowed_table(g.opp, a, ctx, rk)
+                   + team_block(g.team, t, ranks, a8, rk, pool, allc) + allowed_table(g.team, a, ctx, rk) + "</details>")
     return "\n".join(out)
 
 
@@ -772,7 +864,7 @@ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bott
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:20px 14px 40px}
 main{max-width:720px;margin:0 auto}
-h1{font-size:1.4rem;margin:0 0 4px}h3{margin:14px 0 4px;font-size:1rem;color:var(--g)}
+h1{font-size:1.4rem;margin:0 0 4px}h3{margin:14px 0 4px;font-size:1rem;color:var(--g)}h4{margin:12px 0 4px;font-size:.9rem;color:var(--g)}
 .meta{color:var(--mute);margin:0 0 14px}
 .note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--g);padding:10px 14px;margin:0 0 14px;border-radius:8px;font-size:.92rem}
 nav{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;padding-bottom:4px}
@@ -837,10 +929,10 @@ e.textContent='Over '+Math.round(po*100)+'% (fair '+am(po)+') / Under '+Math.rou
 
 
 def write_outputs(sections, td, week, season, notes, have_injuries, have_odds):
-    score_note = ("Score runs 0 to 100. Players with sportsbook odds get a value score: 50 is break-even by the model and 75 is about +10% expected return, "
-                  "at the best price across books." if have_odds else
-                  "Score runs 0 to 100 and shows how a player ranks against every player-game the model scored last season. No sportsbook odds are loaded, "
-                  "so this ranks by chance, not value.")
+    score_note = ("Pick score runs 0 to 100. It blends how likely a player is to hit (70%) with how good the sportsbook's price is (30%), so likely "
+                  "players at fair prices rank above long shots. The Edge tab ranks by price value alone." if have_odds else
+                  "Score runs 0 to 100 and shows how a player ranks against every player-game the model scored last season. No sportsbook odds are "
+                  "loaded, so this ranks by chance, not value.")
     nav = "".join(f"<button data-t='{k}' class='{'on' if i == 0 else ''}'>{label}</button>" for i, (k, label, _) in enumerate(sections))
     body = "".join(f"<section id='{k}'{'' if i == 0 else ' hidden'}>{content}</section>" for i, (k, _, content) in enumerate(sections))
     info = "".join(f"<p>{html.escape(n)}</p>" for n in notes)
@@ -944,6 +1036,22 @@ def record_html(h):
             f"<p class='script'>{ls_txt}{int(h['void'].sum())} picks were voided because the player did not play. Picks are frozen once a game starts, using the last run before it.</p>")
 
 
+def edge_html(pool, propc, odds):
+    if not odds:
+        return ("<div class='card'><p class='script'>Add a sportsbook odds key to see value picks here. "
+                "This tab ranks by price value alone, the way the main list does not.</p></div>")
+    out = ("<h3>Touchdown value</h3><p class='script'>Ranked by value alone, for players with at least a 10% chance. Value counts only half the gap "
+           "between the model and the market, so treat a flag as a place to look, not a lock.</p>")
+    td = pool[pool["vscore"].notna() & (pool["prob"] >= 0.10)].sort_values("vscore", ascending=False).head(20)
+    out += "".join(td_card(i, r) for i, r in enumerate(td.itertuples(), 1))
+    for key, (title, *_rest) in PROPS.items():
+        pr = propc[key]
+        pr = pr[pr["vscore"].notna() & (pr["pwin"] >= 0.45)].sort_values("vscore", ascending=False).head(6)
+        if len(pr):
+            out += f"<h3>{title}: best value</h3>" + "".join(prop_card(i, r, key) for i, r in enumerate(pr.itertuples(), 1))
+    return out
+
+
 def main(season=None):
     season = season or current_season()
     ps, ctx, off = load_data(season)
@@ -952,6 +1060,7 @@ def main(season=None):
     flags, inj_note, roster_team = injury_flags(season, week, ps)
     status = {k: v[0] for k, v in flags.items()} or None
     df = build_features(ps, ctx, a, season, week, unplayed, status, roster_team)
+    tabs = team_tables(ctx, off, a)
 
     cand, note = td_model(df, season)
     notes = [note]
@@ -968,6 +1077,8 @@ def main(season=None):
     pool["rz_rank"] = pool["rz_share_l4"].rank(ascending=False, method="min")
     for c in ["rz_share_l4", "touches_l4", "gl_carries_l4", "tgt_share_l4", "td_l12", "opp_td"]:
         pool["pct_" + c] = pool.groupby("position")[c].rank(pct=True, method="min")
+    pool["pace_rank"] = pool["team"].map(tabs[1]["plays"])
+    pool["pace_n"] = len(tabs[0])
     pool["rank_all"] = np.arange(1, len(pool) + 1)
     boosted = np.where(pool["position"] == "RB", pool["vac_carry"], np.where(pool["position"].isin(["WR", "TE"]), pool["vac_tgt"], 0)) >= 0.15
     pool["signals"] = ((pool["rz_rank"] <= 10).astype(int) + (pool["gl_carries_l4"] >= 1.0) + (pool["spread"] >= 3)
@@ -975,12 +1086,12 @@ def main(season=None):
     td = pool.head(TOP_TD)
     rest = pool.iloc[TOP_TD:]
     long_td = rest[(rest["signals"] >= 1) & (rest["prob"] >= 0.04)].sort_values(["signals", "prob"], ascending=False).head(TOP_LONG)
-    td_section = ("td", "Touchdowns", "".join(td_card(i, r) for i, r in enumerate(td.itertuples(), 1)))
+    td_section = ("td", "Any TD", "".join(td_card(i, r) for i, r in enumerate(td.itertuples(), 1)))
     picks = [pick_rows(season, week, "td", td, "prob", "td_l12"), pick_rows(season, week, "td_long", long_td, "prob", "td_l12")]
     long_html = ("<h3>Touchdown longshots</h3><p class='script'>Players outside the main list, ranked by how many positive signals they have "
-                 "(red zone share, goal line work, favored team, soft matchup, teammate out), then by model chance. The model can't see sportsbook odds, "
-                 "so use the price shown on each card: a longshot only has value if the book pays at least that much. Books usually keep a bigger margin "
-                 "on longshots, so real value here is rarer, and the model is least reliable for low-probability players.</p>"
+                 "(red zone share, goal line work, favored team, soft matchup, teammate out), then by model chance. A longshot only has value "
+                 "if the book pays at least the price shown on its card. Books usually keep a bigger margin on longshots, so real value here is rarer, "
+                 "and the model is least reliable for low-probability players.</p>"
                  + "".join(td_card(r.rank_all, r) for r in long_td.itertuples()))
 
     propc, prop_sections = {}, []
@@ -1001,8 +1112,9 @@ def main(season=None):
         picks.append(pick_rows(season, week, key, top, "proj", f"{key}_l4"))
 
     hist = update_history(pd.concat(picks, ignore_index=True), season, set(unplayed["team"]), ps, ctx)
-    games = ("games", "Games", game_cards(unplayed, team_tables(ctx, off, a), pool, allc, propc))
-    sections = [td_section, ("long", "Longshots", long_html), games] + prop_sections + [("record", "Track record", record_html(hist))]
+    games = ("games", "Games", game_cards(unplayed, tabs, pool, allc, propc, a, ctx))
+    sections = ([td_section, ("edge", "Edge", edge_html(pool, propc, odds)), ("long", "Longshots", long_html), games]
+                + prop_sections + [("record", "Track record", record_html(hist))])
     write_outputs(sections, td, week, season, notes, status is not None, odds is not None)
     print(f"\nDone. Week {week} picks saved to {OUT_DIR}/index.html. Open that file in your browser.")
 
