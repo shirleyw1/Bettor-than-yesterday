@@ -261,7 +261,7 @@
   "team": "Sam Houston",
   "line": 1.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|ml|401858492",
@@ -305,7 +305,7 @@
   "team": "Texas State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401858494|Wayne Knight",
@@ -404,7 +404,7 @@
   "team": "Kennesaw State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|spread|401856828",
@@ -523,6 +523,28 @@
   "gid": 401862804,
   "pick": "A'Marion Peterson",
   "team": "UTSA",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "7|ml|401856726",
+  "week": 7,
+  "type": "ml",
+  "gid": 401856726,
+  "pick": "Arkansas +185",
+  "team": "Arkansas",
+  "line": null,
+  "ml": 185,
+  "result": null
+ },
+ {
+  "k": "7|td|401866442|Chance Morrow",
+  "week": 7,
+  "type": "td",
+  "gid": 401866442,
+  "pick": "Chance Morrow",
+  "team": "Buffalo",
   "line": null,
   "ml": null,
   "result": null
