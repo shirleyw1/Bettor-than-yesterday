@@ -448,7 +448,7 @@
   "team": "Purdue",
   "line": -3.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401856829|Michael Hawkins Jr.",
@@ -503,7 +503,7 @@
   "team": "Purdue",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401862802|Cale Hellums",
@@ -545,6 +545,17 @@
   "gid": 401866442,
   "pick": "Chance Morrow",
   "team": "Buffalo",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "7|td|401866444|Connor Walendzak",
+  "week": 7,
+  "type": "td",
+  "gid": 401866444,
+  "pick": "Connor Walendzak",
+  "team": "Toledo",
   "line": null,
   "ml": null,
   "result": null
