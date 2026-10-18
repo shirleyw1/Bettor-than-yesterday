@@ -217,7 +217,7 @@
   "team": "Missouri",
   "line": 6.0,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|spread|401858492",
@@ -228,7 +228,7 @@
   "team": "Nebraska",
   "line": 12.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|spread|401856722",
@@ -239,7 +239,7 @@
   "team": "Kentucky",
   "line": 6.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|spread|401856723",
@@ -250,7 +250,7 @@
   "team": "Alabama",
   "line": -6.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|spread|401871068",
@@ -272,7 +272,7 @@
   "team": "Nebraska",
   "line": null,
   "ml": 390,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|ml|401856721",
@@ -283,7 +283,7 @@
   "team": "Missouri",
   "line": null,
   "ml": 185,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|ml|401856722",
@@ -294,7 +294,7 @@
   "team": "Kentucky",
   "line": null,
   "ml": 190,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401860923|Davian Jackson",
@@ -316,7 +316,7 @@
   "team": "UCLA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401858266|Nate Sheppard",
@@ -327,7 +327,7 @@
   "team": "Duke",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401871067|Cam'Ron Lacy",
@@ -349,7 +349,7 @@
   "team": "Texas",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401856724|Jadan Baugh",
@@ -360,7 +360,7 @@
   "team": "Florida",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401858488|Jeremiah Smith",
@@ -371,7 +371,7 @@
   "team": "Ohio State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401858266|Demon June",
@@ -382,7 +382,7 @@
   "team": "North Carolina",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401856721|Jamal Roberts",
@@ -393,7 +393,7 @@
   "team": "Missouri",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401871054|Rickie Collins",
@@ -415,7 +415,7 @@
   "team": "Texas Tech",
   "line": -14.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|spread|401864521",
@@ -426,7 +426,7 @@
   "team": "New Mexico",
   "line": -14.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|spread|401858267",
@@ -437,7 +437,7 @@
   "team": "Pittsburgh",
   "line": -6.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|spread|401858493",
@@ -459,7 +459,7 @@
   "team": "West Virginia",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401862806|D.J. Crowther",
@@ -470,7 +470,7 @@
   "team": "South Florida",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401860903|Jesse Legree",
@@ -481,7 +481,7 @@
   "team": "Oregon State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401856833|Wayshawn Parker",
@@ -492,7 +492,7 @@
   "team": "Utah",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401858493|Fame Ijeboi",
@@ -514,7 +514,7 @@
   "team": "Army",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401862804|A'Marion Peterson",
@@ -525,7 +525,7 @@
   "team": "UTSA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|ml|401856726",
@@ -536,7 +536,7 @@
   "team": "Arkansas",
   "line": null,
   "ml": 185,
-  "result": null
+  "result": "W"
  },
  {
   "k": "7|td|401866442|Chance Morrow",
@@ -547,7 +547,7 @@
   "team": "Buffalo",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "7|td|401866444|Connor Walendzak",
@@ -556,6 +556,204 @@
   "gid": 401866444,
   "pick": "Connor Walendzak",
   "team": "Toledo",
+  "line": null,
+  "ml": null,
+  "result": "L"
+ },
+ {
+  "k": "8|spread|401858498",
+  "week": 8,
+  "type": "spread",
+  "gid": 401858498,
+  "pick": "Northwestern -16.5",
+  "team": "Northwestern",
+  "line": -16.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|spread|401869845",
+  "week": 8,
+  "type": "spread",
+  "gid": 401869845,
+  "pick": "James Madison -10.5",
+  "team": "James Madison",
+  "line": -10.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|spread|401856729",
+  "week": 8,
+  "type": "spread",
+  "gid": 401856729,
+  "pick": "Kentucky -11.5",
+  "team": "Kentucky",
+  "line": -11.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|spread|401871056",
+  "week": 8,
+  "type": "spread",
+  "gid": 401871056,
+  "pick": "Liberty -9.5",
+  "team": "Liberty",
+  "line": -9.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|spread|401861965",
+  "week": 8,
+  "type": "spread",
+  "gid": 401861965,
+  "pick": "Massachusetts +16.5",
+  "team": "Massachusetts",
+  "line": 16.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|ml|401858272",
+  "week": 8,
+  "type": "ml",
+  "gid": 401858272,
+  "pick": "Stanford +225",
+  "team": "Stanford",
+  "line": null,
+  "ml": 225,
+  "result": null
+ },
+ {
+  "k": "8|ml|401858271",
+  "week": 8,
+  "type": "ml",
+  "gid": 401858271,
+  "pick": "Duke +110",
+  "team": "Duke",
+  "line": null,
+  "ml": 110,
+  "result": null
+ },
+ {
+  "k": "8|ml|401856728",
+  "week": 8,
+  "type": "ml",
+  "gid": 401856728,
+  "pick": "LSU -218",
+  "team": "LSU",
+  "line": null,
+  "ml": -218,
+  "result": null
+ },
+ {
+  "k": "8|td|401858499|Wayne Knight",
+  "week": 8,
+  "type": "td",
+  "gid": 401858499,
+  "pick": "Wayne Knight",
+  "team": "UCLA",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401858272|Micah Ford",
+  "week": 8,
+  "type": "td",
+  "gid": 401858272,
+  "pick": "Micah Ford",
+  "team": "Stanford",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401858271|Nate Sheppard",
+  "week": 8,
+  "type": "td",
+  "gid": 401858271,
+  "pick": "Nate Sheppard",
+  "team": "Duke",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401858498|Aidan Chiles",
+  "week": 8,
+  "type": "td",
+  "gid": 401858498,
+  "pick": "Aidan Chiles",
+  "team": "Northwestern",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401871055|Maguire Anderson",
+  "week": 8,
+  "type": "td",
+  "gid": 401871055,
+  "pick": "Maguire Anderson",
+  "team": "Florida International",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401862808|Cale Hellums",
+  "week": 8,
+  "type": "td",
+  "gid": 401862808,
+  "pick": "Cale Hellums",
+  "team": "Army",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401858276|Gideon Davidson",
+  "week": 8,
+  "type": "td",
+  "gid": 401858276,
+  "pick": "Gideon Davidson",
+  "team": "Clemson",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401856837|Wayshawn Parker",
+  "week": 8,
+  "type": "td",
+  "gid": 401856837,
+  "pick": "Wayshawn Parker",
+  "team": "Utah",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401858498|Joseph Himon II",
+  "week": 8,
+  "type": "td",
+  "gid": 401858498,
+  "pick": "Joseph Himon II",
+  "team": "Northwestern",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401856731|DeSean Bishop",
+  "week": 8,
+  "type": "td",
+  "gid": 401856731,
+  "pick": "DeSean Bishop",
+  "team": "Tennessee",
   "line": null,
   "ml": null,
   "result": null
