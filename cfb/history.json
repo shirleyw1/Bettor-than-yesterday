@@ -701,7 +701,7 @@
   "team": "Florida International",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "8|td|401862808|Cale Hellums",
@@ -754,6 +754,83 @@
   "gid": 401856731,
   "pick": "DeSean Bishop",
   "team": "Tennessee",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|spread|401856730",
+  "week": 8,
+  "type": "spread",
+  "gid": 401856730,
+  "pick": "Mississippi State +4.5",
+  "team": "Mississippi State",
+  "line": 4.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|ml|401856730",
+  "week": 8,
+  "type": "ml",
+  "gid": 401856730,
+  "pick": "Mississippi State +160",
+  "team": "Mississippi State",
+  "line": null,
+  "ml": 160,
+  "result": null
+ },
+ {
+  "k": "8|ml|401861965",
+  "week": 8,
+  "type": "ml",
+  "gid": 401861965,
+  "pick": "Massachusetts +500",
+  "team": "Massachusetts",
+  "line": null,
+  "ml": 500,
+  "result": null
+ },
+ {
+  "k": "8|td|401866447|TJ Horton",
+  "week": 8,
+  "type": "td",
+  "gid": 401866447,
+  "pick": "TJ Horton",
+  "team": "Ball State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401862810|Jahiem White",
+  "week": 8,
+  "type": "td",
+  "gid": 401862810,
+  "pick": "Jahiem White",
+  "team": "North Texas",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401862810|Jackson Gutierrez",
+  "week": 8,
+  "type": "td",
+  "gid": 401862810,
+  "pick": "Jackson Gutierrez",
+  "team": "Navy",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "8|td|401860906|Eli Wood",
+  "week": 8,
+  "type": "td",
+  "gid": 401860906,
+  "pick": "Eli Wood",
+  "team": "Utah State",
   "line": null,
   "ml": null,
   "result": null
