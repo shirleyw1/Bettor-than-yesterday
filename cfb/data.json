@@ -1,563 +1,399 @@
 {
- "updated": "2026-10-23T13:38+00:00",
- "week": 8,
+ "updated": "2026-10-25T13:30+00:00",
+ "week": 9,
  "spread": [
   {
-   "game": "Rutgers @ Northwestern",
-   "pick": "Northwestern -16.5",
-   "edge": 4.5,
-   "start": "2026-10-24T16:00:00.000Z",
-   "gid": 401858498,
-   "team": "Northwestern",
-   "line": -16.5
-  },
-  {
-   "game": "Vanderbilt @ Kentucky",
-   "pick": "Kentucky -10.5",
-   "edge": 3.9,
-   "start": "2026-10-24T23:30:00.000Z",
-   "gid": 401856729,
-   "team": "Kentucky",
-   "line": -10.5
-  },
-  {
-   "game": "Louisiana @ Southern Miss",
-   "pick": "Louisiana -10",
+   "game": "Washington @ Nebraska",
+   "pick": "Nebraska -9.5",
    "edge": 3.6,
-   "start": "2026-10-24T21:00:00.000Z",
-   "gid": 401869967,
-   "team": "Louisiana",
-   "line": -10.0
+   "start": "2026-11-01T00:00:00.000Z",
+   "gid": 401858504,
+   "team": "Nebraska",
+   "line": -9.5
   },
   {
-   "game": "Boise State @ Washington State",
-   "pick": "Boise State -13.5",
-   "edge": 3.6,
-   "start": "2026-10-24T22:00:00.000Z",
-   "gid": 401860907,
-   "team": "Boise State",
-   "line": -13.5
-  },
-  {
-   "game": "Oklahoma @ Mississippi State",
-   "pick": "Mississippi State +3",
-   "edge": 3.5,
-   "start": "2026-10-24T19:30:00.000Z",
-   "gid": 401856730,
-   "team": "Mississippi State",
-   "line": 3.0
-  },
-  {
-   "game": "Akron @ Kent State",
-   "pick": "Kent State -3",
+   "game": "Wisconsin @ Iowa",
+   "pick": "Wisconsin +3.5",
    "edge": 3.3,
-   "start": "2026-10-24T17:00:00.000Z",
-   "gid": 401866446,
-   "team": "Kent State",
-   "line": -3.0
+   "start": "2026-10-31T16:00:00.000Z",
+   "gid": 401858502,
+   "team": "Wisconsin",
+   "line": 3.5
   },
   {
-   "game": "Duke @ Virginia",
-   "pick": "Duke +2.5",
-   "edge": 2.8,
-   "start": "2026-10-23T23:00:00.000Z",
-   "gid": 401858271,
-   "team": "Duke",
-   "line": 2.5
+   "game": "Mississippi State @ Texas",
+   "pick": "Mississippi State +20.5",
+   "edge": 3.1,
+   "start": "2026-10-31T23:30:00.000Z",
+   "gid": 401856737,
+   "team": "Mississippi State",
+   "line": 20.5
   },
   {
-   "game": "LSU @ Auburn",
-   "pick": "LSU -7",
-   "edge": 2.8,
-   "start": "2026-10-24T16:00:00.000Z",
-   "gid": 401856728,
-   "team": "LSU",
-   "line": -7.0
+   "game": "Arizona State @ BYU",
+   "pick": "BYU -14.5",
+   "edge": 2.9,
+   "start": "2026-10-31T19:30:00.000Z",
+   "gid": 401856843,
+   "team": "BYU",
+   "line": -14.5
+  },
+  {
+   "game": "Troy @ James Madison",
+   "pick": "James Madison -17.5",
+   "edge": 2.3,
+   "start": "2026-10-29T23:30:00.000Z",
+   "gid": 401869963,
+   "team": "James Madison",
+   "line": -17.5
+  },
+  {
+   "game": "Northwestern @ Oregon",
+   "pick": "Northwestern +4.5",
+   "edge": 2.2,
+   "start": "2026-10-31T19:30:00.000Z",
+   "gid": 401858505,
+   "team": "Northwestern",
+   "line": 4.5
+  },
+  {
+   "game": "South Carolina @ Oklahoma",
+   "pick": "South Carolina +5.5",
+   "edge": 2.2,
+   "start": "2026-10-31T20:15:00.000Z",
+   "gid": 401856736,
+   "team": "South Carolina",
+   "line": 5.5
+  },
+  {
+   "game": "Sam Houston @ Missouri State",
+   "pick": "Sam Houston +6.5",
+   "edge": 2.1,
+   "start": "2026-10-28T00:00:00.000Z",
+   "gid": 401871072,
+   "team": "Sam Houston",
+   "line": 6.5
   }
  ],
  "ml": [
   {
-   "game": "Oklahoma @ Mississippi State",
-   "pick": "Mississippi State +142",
-   "ev": 24.4,
-   "p": 51,
-   "start": "2026-10-24T19:30:00.000Z",
-   "gid": 401856730,
-   "team": "Mississippi State",
-   "ml": 142
+   "game": "Wisconsin @ Iowa",
+   "pick": "Wisconsin +145",
+   "ev": 21.1,
+   "p": 49,
+   "start": "2026-10-31T16:00:00.000Z",
+   "gid": 401858502,
+   "team": "Wisconsin",
+   "ml": 145
   },
   {
-   "game": "NC State @ Stanford",
-   "pick": "Stanford +215",
-   "ev": 20.5,
-   "p": 38,
-   "start": "2026-10-24T02:30:00.000Z",
-   "gid": 401858272,
-   "team": "Stanford",
-   "ml": 215
+   "game": "Washington @ Nebraska",
+   "pick": "Nebraska -325",
+   "ev": 9.1,
+   "p": 83,
+   "start": "2026-11-01T00:00:00.000Z",
+   "gid": 401858504,
+   "team": "Nebraska",
+   "ml": -325
   },
   {
-   "game": "Akron @ Kent State",
-   "pick": "Kent State -148",
-   "ev": 14.0,
-   "p": 68,
-   "start": "2026-10-24T17:00:00.000Z",
-   "gid": 401866446,
-   "team": "Kent State",
-   "ml": -148
+   "game": "Northwestern @ Oregon",
+   "pick": "Northwestern +150",
+   "ev": 8.4,
+   "p": 43,
+   "start": "2026-10-31T19:30:00.000Z",
+   "gid": 401858505,
+   "team": "Northwestern",
+   "ml": 150
   },
   {
-   "game": "Kansas State @ Arizona State",
-   "pick": "Kansas State -130",
-   "ev": 12.5,
-   "p": 64,
-   "start": "2026-10-24T19:45:00.000Z",
-   "gid": 401856839,
-   "team": "Kansas State",
-   "ml": -130
+   "game": "Kennesaw State @ Middle Tennessee",
+   "pick": "Middle Tennessee -135",
+   "ev": 8.0,
+   "p": 62,
+   "start": "2026-10-28T23:00:00.000Z",
+   "gid": 401871058,
+   "team": "Middle Tennessee",
+   "ml": -135
   },
   {
-   "game": "Massachusetts @ UConn",
-   "pick": "Massachusetts +490",
-   "ev": 12.4,
-   "p": 19,
-   "start": "2026-10-23T23:00:00.000Z",
-   "gid": 401861965,
-   "team": "Massachusetts",
-   "ml": 490
+   "game": "Baylor @ UCF",
+   "pick": "UCF -122",
+   "ev": 7.8,
+   "p": 59,
+   "start": "2026-10-30T23:30:00.000Z",
+   "gid": 401856844,
+   "team": "UCF",
+   "ml": -122
   }
  ],
  "td": [
   {
-   "player": "Micah Ford",
-   "team": "Stanford",
-   "game": "NC State @ Stanford",
-   "p": 79,
-   "fair": "-380",
-   "gid": 401858272
-  },
-  {
    "player": "Wayne Knight",
    "team": "UCLA",
-   "game": "Michigan State @ UCLA",
-   "p": 79,
-   "fair": "-375",
-   "gid": 401858499
-  },
-  {
-   "player": "TJ Horton",
-   "team": "Ball State",
-   "game": "Sacramento State @ Ball State",
-   "p": 78,
-   "fair": "-345",
-   "gid": 401866447
-  },
-  {
-   "player": "Cale Hellums",
-   "team": "Army",
-   "game": "Army @ Tulsa",
-   "p": 76,
-   "fair": "-312",
-   "gid": 401862808
-  },
-  {
-   "player": "Nate Sheppard",
-   "team": "Duke",
-   "game": "Duke @ Virginia",
-   "p": 75,
-   "fair": "-303",
-   "gid": 401858271
-  },
-  {
-   "player": "Aidan Chiles",
-   "team": "Northwestern",
-   "game": "Rutgers @ Northwestern",
-   "p": 75,
-   "fair": "-299",
-   "gid": 401858498
-  },
-  {
-   "player": "Gideon Davidson",
-   "team": "Clemson",
-   "game": "Virginia Tech @ Clemson",
-   "p": 75,
-   "fair": "-299",
-   "gid": 401858276
+   "game": "Nevada @ UCLA",
+   "p": 83,
+   "fair": "-490",
+   "gid": 401858508
   },
   {
    "player": "Jahiem White",
    "team": "North Texas",
-   "game": "North Texas @ Navy",
+   "game": "Florida Atlantic @ North Texas",
+   "p": 82,
+   "fair": "-464",
+   "gid": 401862812
+  },
+  {
+   "player": "Isaiah Myers",
+   "team": "Missouri State",
+   "game": "Sam Houston @ Missouri State",
    "p": 74,
    "fair": "-284",
-   "gid": 401862810
+   "gid": 401871072
   },
   {
-   "player": "Jackson Gutierrez",
-   "team": "Navy",
-   "game": "North Texas @ Navy",
-   "p": 73,
-   "fair": "-271",
-   "gid": 401862810
+   "player": "Jesse Legree",
+   "team": "Oregon State",
+   "game": "Oregon State @ Fresno State",
+   "p": 72,
+   "fair": "-259",
+   "gid": 401860924
   },
   {
-   "player": "Eli Wood",
-   "team": "Utah State",
-   "game": "Utah State @ Texas State",
-   "p": 73,
-   "fair": "-264",
-   "gid": 401860906
+   "player": "Nolan James Jr.",
+   "team": "Notre Dame",
+   "game": "Notre Dame @ Navy",
+   "p": 71,
+   "fair": "-248",
+   "gid": 401859185
   },
   {
    "player": "Wayshawn Parker",
    "team": "Utah",
-   "game": "Houston @ Utah",
+   "game": "Utah @ Cincinnati",
+   "p": 71,
+   "fair": "-247",
+   "gid": 401856848
+  },
+  {
+   "player": "Ashton Daniels",
+   "team": "Florida State",
+   "game": "Clemson @ Florida State",
+   "p": 71,
+   "fair": "-243",
+   "gid": 401858280
+  },
+  {
+   "player": "Jeremiah Smith",
+   "team": "Ohio State",
+   "game": "Ohio State @ USC",
    "p": 70,
-   "fair": "-238",
-   "gid": 401856837
+   "fair": "-229",
+   "gid": 401858509
   },
   {
-   "player": "Joseph Himon II",
-   "team": "Northwestern",
-   "game": "Rutgers @ Northwestern",
-   "p": 69,
-   "fair": "-227",
-   "gid": 401858498
+   "player": "Bear Bachmeier",
+   "team": "BYU",
+   "game": "Arizona State @ BYU",
+   "p": 65,
+   "fair": "-186",
+   "gid": 401856843
   },
   {
-   "player": "D'Wayne' Winfield",
-   "team": "Louisiana",
-   "game": "Louisiana @ Southern Miss",
-   "p": 69,
-   "fair": "-220",
-   "gid": 401869967
+   "player": "Jadan Baugh",
+   "team": "Florida",
+   "game": "Florida @ Georgia",
+   "p": 65,
+   "fair": "-186",
+   "gid": 401856734
   },
   {
-   "player": "Dylan Riley",
-   "team": "Boise State",
-   "game": "Boise State @ Washington State",
-   "p": 69,
-   "fair": "-225",
-   "gid": 401860907
+   "player": "Gideon Davidson",
+   "team": "Clemson",
+   "game": "Clemson @ Florida State",
+   "p": 65,
+   "fair": "-186",
+   "gid": 401858280
   },
   {
-   "player": "Demon June",
-   "team": "North Carolina",
-   "game": "Syracuse @ North Carolina",
-   "p": 69,
-   "fair": "-227",
-   "gid": 401858275
+   "player": "Jamal Roberts",
+   "team": "Missouri",
+   "game": "Missouri @ Arkansas",
+   "p": 65,
+   "fair": "-186",
+   "gid": 401856733
+  },
+  {
+   "player": "Kendrick Raphael",
+   "team": "SMU",
+   "game": "SMU @ Syracuse",
+   "p": 62,
+   "fair": "-166",
+   "gid": 401858278
+  },
+  {
+   "player": "Cole Tabb",
+   "team": "Cincinnati",
+   "game": "Utah @ Cincinnati",
+   "p": 62,
+   "fair": "-161",
+   "gid": 401856848
+  },
+  {
+   "player": "Cam Coleman",
+   "team": "Texas",
+   "game": "Mississippi State @ Texas",
+   "p": 62,
+   "fair": "-164",
+   "gid": 401856737
   }
  ],
  "cheats": [
   {
-   "game": "Massachusetts @ UConn",
-   "start": "2026-10-23T23:00:00.000Z",
-   "line": "UConn -14.5",
-   "total": 50.5,
-   "codes": [
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Duke @ Virginia",
-   "start": "2026-10-23T23:00:00.000Z",
-   "line": "Virginia -2.5",
-   "total": 46.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Army @ Tulsa",
-   "start": "2026-10-24T00:30:00.000Z",
-   "line": "Tulsa -1.5",
-   "total": 54.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Air Force @ Wyoming",
-   "start": "2026-10-24T01:00:00.000Z",
-   "line": "Air Force -5.5",
-   "total": 44.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "NC State @ Stanford",
-   "start": "2026-10-24T02:30:00.000Z",
-   "line": "NC State -6.5",
-   "total": 55.5,
-   "codes": [
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Texas Tech @ Cincinnati",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "Texas Tech -11.5",
-   "total": 56.5,
-   "codes": [
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "LSU @ Auburn",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "LSU -7",
-   "total": 51.5,
-   "codes": [
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Rutgers @ Northwestern",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "Northwestern -16.5",
+   "game": "Delaware @ Western Kentucky",
+   "start": "2026-10-27T23:00:00.000Z",
+   "line": "Delaware -2.5",
    "total": 58.5,
    "codes": [
-    "Model and market split by 13 pts: trust the market first."
+    "Toss-up: the moneyline price matters more than the side."
    ]
   },
   {
-   "game": "Indiana @ Michigan",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "Indiana -7.5",
-   "total": 42.5,
+   "game": "Sam Houston @ Missouri State",
+   "start": "2026-10-28T00:00:00.000Z",
+   "line": "Missouri State -6.5",
+   "total": 51.5,
    "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Model and market split by 8 pts: trust the market first."
+    "Model and market split by 6 pts: trust the market first."
    ]
   },
   {
-   "game": "California @ SMU",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "SMU -18.5",
-   "total": 55.5,
-   "codes": [
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Western Michigan @ Toledo",
-   "start": "2026-10-24T16:00:00.000Z",
-   "line": "Toledo -3",
-   "total": 47.5,
+   "game": "Kennesaw State @ Middle Tennessee",
+   "start": "2026-10-28T23:00:00.000Z",
+   "line": "Middle Tennessee -2.5",
+   "total": 48.5,
    "codes": [
     "Toss-up: the moneyline price matters more than the side."
    ]
   },
   {
-   "game": "Akron @ Kent State",
-   "start": "2026-10-24T17:00:00.000Z",
-   "line": "Kent State -3",
-   "total": 47.5,
+   "game": "Jacksonville State @ New Mexico State",
+   "start": "2026-10-29T00:00:00.000Z",
+   "line": "Jacksonville State -3",
+   "total": 50.5,
    "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 10 pts: trust the market first."
+    "Toss-up: the moneyline price matters more than the side."
    ]
   },
   {
-   "game": "Miami (OH) @ Central Michigan",
-   "start": "2026-10-24T17:00:00.000Z",
-   "line": "Miami (OH) -3",
+   "game": "Florida Atlantic @ North Texas",
+   "start": "2026-10-29T23:30:00.000Z",
+   "line": "North Texas -12.5",
+   "total": 70.5,
+   "codes": [
+    "Shootout total: both offenses get a TD bump."
+   ]
+  },
+  {
+   "game": "Troy @ James Madison",
+   "start": "2026-10-29T23:30:00.000Z",
+   "line": "James Madison -17.5",
+   "total": 52.5,
+   "codes": [
+    "Model and market split by 7 pts: trust the market first."
+   ]
+  },
+  {
+   "game": "Baylor @ UCF",
+   "start": "2026-10-30T23:30:00.000Z",
+   "line": "UCF -2.5",
+   "total": 48.5,
+   "codes": [
+    "Toss-up: the moneyline price matters more than the side."
+   ]
+  },
+  {
+   "game": "Wisconsin @ Iowa",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "Iowa -3.5",
    "total": 39.5,
    "codes": [
     "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 6 pts: trust the market first."
+    "Model and market split by 9 pts: trust the market first."
    ]
   },
   {
-   "game": "Baylor @ Kansas",
-   "start": "2026-10-24T17:00:00.000Z",
-   "line": "Baylor -2.5",
-   "total": 53.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Iowa @ Minnesota",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "Iowa -7",
-   "total": 40.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
-   ]
-  },
-  {
-   "game": "BYU @ UCF",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "BYU -7",
-   "total": 43.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
-   ]
-  },
-  {
-   "game": "North Texas @ Navy",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "North Texas -2.5",
-   "total": 62.5,
-   "codes": [
-    "Shootout total: both offenses get a TD bump.",
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Texas A&M @ Alabama",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "Alabama -13.5",
-   "total": 50.5,
-   "codes": [
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Tennessee @ South Carolina",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "South Carolina -2.5",
-   "total": 50.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Oklahoma @ Mississippi State",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "Oklahoma -3",
-   "total": 46.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 10 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Michigan State @ UCLA",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "UCLA -14.5",
-   "total": 43.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
-   ]
-  },
-  {
-   "game": "Bowling Green @ Buffalo",
-   "start": "2026-10-24T19:30:00.000Z",
-   "line": "Buffalo -3.0",
-   "total": 45.0,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Kansas State @ Arizona State",
-   "start": "2026-10-24T19:45:00.000Z",
-   "line": "Kansas State -2.5",
-   "total": 55.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 6 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Louisiana @ Southern Miss",
-   "start": "2026-10-24T21:00:00.000Z",
-   "line": "Louisiana -10",
+   "game": "Notre Dame @ Navy",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "Notre Dame -30.5",
    "total": 52.5,
    "codes": [
-    "Model and market split by 10 pts: trust the market first."
+    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
    ]
   },
   {
-   "game": "Boise State @ Washington State",
-   "start": "2026-10-24T22:00:00.000Z",
-   "line": "Boise State -13.5",
-   "total": 53.5,
-   "codes": [
-    "Model and market split by 10 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "San Diego State @ Colorado State",
-   "start": "2026-10-24T22:30:00.000Z",
-   "line": "San Diego State -1.5",
-   "total": 62.5,
-   "codes": [
-    "Shootout total: both offenses get a TD bump.",
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Georgia State @ Arkansas State",
-   "start": "2026-10-24T23:00:00.000Z",
-   "line": "Georgia State -2.5",
-   "total": 57.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Virginia Tech @ Clemson",
-   "start": "2026-10-24T23:00:00.000Z",
-   "line": "Clemson -2.5",
-   "total": 49.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Syracuse @ North Carolina",
-   "start": "2026-10-24T23:30:00.000Z",
-   "line": "North Carolina -9.5",
-   "total": 46.5,
-   "codes": [
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Vanderbilt @ Kentucky",
-   "start": "2026-10-24T23:30:00.000Z",
-   "line": "Kentucky -10.5",
-   "total": 52.5,
-   "codes": [
-    "Model and market split by 11 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "USC @ Wisconsin",
-   "start": "2026-10-24T23:30:00.000Z",
-   "line": "USC -3",
-   "total": 50.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side.",
-    "Model and market split by 8 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "UTSA @ Tulane",
-   "start": "2026-10-25T00:00:00.000Z",
-   "line": "UTSA -3",
+   "game": "Arizona State @ BYU",
+   "start": "2026-10-31T19:30:00.000Z",
+   "line": "BYU -14.5",
    "total": 51.5,
    "codes": [
-    "Toss-up: the moneyline price matters more than the side."
+    "Model and market split by 8 pts: trust the market first."
    ]
   },
   {
-   "game": "North Dakota State @ New Mexico",
-   "start": "2026-10-25T02:00:00.000Z",
-   "line": "New Mexico -4.5",
-   "total": 40.5,
+   "game": "Minnesota @ Indiana",
+   "start": "2026-10-31T19:30:00.000Z",
+   "line": "Indiana -20.5",
+   "total": 43.5,
    "codes": [
     "Grinder: points are scarce, rushing TDs beat receiving TDs."
+   ]
+  },
+  {
+   "game": "Northwestern @ Oregon",
+   "start": "2026-10-31T19:30:00.000Z",
+   "line": "Oregon -4.5",
+   "total": 51.5,
+   "codes": [
+    "Model and market split by 6 pts: trust the market first."
+   ]
+  },
+  {
+   "game": "Nevada @ UCLA",
+   "start": "2026-10-31T20:15:00.000Z",
+   "line": "UCLA -23.5",
+   "total": 48.5,
+   "codes": [
+    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
+   ]
+  },
+  {
+   "game": "South Carolina @ Oklahoma",
+   "start": "2026-10-31T20:15:00.000Z",
+   "line": "Oklahoma -5.5",
+   "total": 43.5,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
+    "Model and market split by 6 pts: trust the market first."
+   ]
+  },
+  {
+   "game": "Mississippi State @ Texas",
+   "start": "2026-10-31T23:30:00.000Z",
+   "line": "Texas -20.5",
+   "total": 50.5,
+   "codes": [
+    "Model and market split by 9 pts: trust the market first."
+   ]
+  },
+  {
+   "game": "Washington @ Nebraska",
+   "start": "2026-11-01T00:00:00.000Z",
+   "line": "Nebraska -9.5",
+   "total": 49.5,
+   "codes": [
+    "Model and market split by 10 pts: trust the market first."
    ]
   }
  ]
