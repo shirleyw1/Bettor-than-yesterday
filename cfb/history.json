@@ -987,7 +987,7 @@
   "team": "Missouri State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "9|td|401860924|Jesse Legree",
@@ -1062,6 +1062,116 @@
   "gid": 401856734,
   "pick": "Jadan Baugh",
   "team": "Florida",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|spread|401858281",
+  "week": 9,
+  "type": "spread",
+  "gid": 401858281,
+  "pick": "Pittsburgh -7.5",
+  "team": "Pittsburgh",
+  "line": -7.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|ml|401858277",
+  "week": 9,
+  "type": "ml",
+  "gid": 401858277,
+  "pick": "California +260",
+  "team": "California",
+  "line": null,
+  "ml": 260,
+  "result": null
+ },
+ {
+  "k": "9|ml|401856736",
+  "week": 9,
+  "type": "ml",
+  "gid": 401856736,
+  "pick": "South Carolina +164",
+  "team": "South Carolina",
+  "line": null,
+  "ml": 164,
+  "result": null
+ },
+ {
+  "k": "9|td|401860910|Eli Wood",
+  "week": 9,
+  "type": "td",
+  "gid": 401860910,
+  "pick": "Eli Wood",
+  "team": "Utah State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401858279|Nate Sheppard",
+  "week": 9,
+  "type": "td",
+  "gid": 401858279,
+  "pick": "Nate Sheppard",
+  "team": "Duke",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401862814|Cale Hellums",
+  "week": 9,
+  "type": "td",
+  "gid": 401862814,
+  "pick": "Cale Hellums",
+  "team": "Army",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401858503|Collin Dixon",
+  "week": 9,
+  "type": "td",
+  "gid": 401858503,
+  "pick": "Collin Dixon",
+  "team": "Illinois",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401860908|Dylan Riley",
+  "week": 9,
+  "type": "td",
+  "gid": 401860908,
+  "pick": "Dylan Riley",
+  "team": "Boise State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401864530|Jackson Arnold",
+  "week": 9,
+  "type": "td",
+  "gid": 401864530,
+  "pick": "Jackson Arnold",
+  "team": "UNLV",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|td|401858283|Lincoln Kienholz",
+  "week": 9,
+  "type": "td",
+  "gid": 401858283,
+  "pick": "Lincoln Kienholz",
+  "team": "Louisville",
   "line": null,
   "ml": null,
   "result": null
