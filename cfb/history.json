@@ -921,7 +921,7 @@
   "team": "James Madison",
   "line": -17.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "9|ml|401858502",
@@ -976,7 +976,7 @@
   "team": "North Texas",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "9|td|401871072|Isaiah Myers",
@@ -1174,6 +1174,28 @@
   "team": "Louisville",
   "line": null,
   "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|spread|401858507",
+  "week": 9,
+  "type": "spread",
+  "gid": 401858507,
+  "pick": "Rutgers +16.5",
+  "team": "Rutgers",
+  "line": 16.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "9|ml|401871095",
+  "week": 9,
+  "type": "ml",
+  "gid": 401871095,
+  "pick": "UL Monroe +145",
+  "team": "UL Monroe",
+  "line": null,
+  "ml": 145,
   "result": null
  }
 ]

@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T13:55+00:00",
+ "updated": "2026-10-30T13:56+00:00",
  "week": 9,
  "spread": [
   {
@@ -12,104 +12,84 @@
    "line": -7.5
   },
   {
-   "game": "Wisconsin @ Iowa",
-   "pick": "Wisconsin +3.5",
-   "edge": 3.3,
-   "start": "2026-10-31T16:00:00.000Z",
-   "gid": 401858502,
-   "team": "Wisconsin",
-   "line": 3.5
-  },
-  {
-   "game": "Georgia Tech @ Pittsburgh",
-   "pick": "Pittsburgh -7.5",
-   "edge": 3.3,
-   "start": "2026-10-31T23:30:00.000Z",
-   "gid": 401858281,
-   "team": "Pittsburgh",
-   "line": -7.5
-  },
-  {
    "game": "Mississippi State @ Texas",
    "pick": "Mississippi State +20.5",
-   "edge": 3.1,
+   "edge": 3.2,
    "start": "2026-10-31T23:30:00.000Z",
    "gid": 401856737,
    "team": "Mississippi State",
    "line": 20.5
   },
   {
+   "game": "Wisconsin @ Iowa",
+   "pick": "Wisconsin +2.5",
+   "edge": 3.0,
+   "start": "2026-10-31T16:00:00.000Z",
+   "gid": 401858502,
+   "team": "Wisconsin",
+   "line": 2.5
+  },
+  {
+   "game": "Georgia Tech @ Pittsburgh",
+   "pick": "Pittsburgh -8.5",
+   "edge": 2.9,
+   "start": "2026-10-31T23:30:00.000Z",
+   "gid": 401858281,
+   "team": "Pittsburgh",
+   "line": -8.5
+  },
+  {
+   "game": "Michigan @ Rutgers",
+   "pick": "Rutgers +16.5",
+   "edge": 2.3,
+   "start": "2026-10-31T16:30:00.000Z",
+   "gid": 401858507,
+   "team": "Rutgers",
+   "line": 16.5
+  },
+  {
    "game": "Arizona State @ BYU",
-   "pick": "BYU -16",
-   "edge": 2.4,
+   "pick": "BYU -16.5",
+   "edge": 2.3,
    "start": "2026-10-31T19:30:00.000Z",
    "gid": 401856843,
    "team": "BYU",
-   "line": -16.0
+   "line": -16.5
   },
   {
-   "game": "Northwestern @ Oregon",
-   "pick": "Northwestern +3.5",
-   "edge": 1.9,
-   "start": "2026-10-31T19:30:00.000Z",
-   "gid": 401858505,
-   "team": "Northwestern",
-   "line": 3.5
-  },
-  {
-   "game": "South Carolina @ Oklahoma",
-   "pick": "South Carolina +4.5",
-   "edge": 1.9,
+   "game": "Purdue @ Penn State",
+   "pick": "Purdue +10.5",
+   "edge": 2.1,
    "start": "2026-10-31T20:15:00.000Z",
-   "gid": 401856736,
-   "team": "South Carolina",
-   "line": 4.5
+   "gid": 401858506,
+   "team": "Purdue",
+   "line": 10.5
   },
   {
-   "game": "Southern Miss @ UL Monroe",
-   "pick": "UL Monroe +3.5",
-   "edge": 1.8,
-   "start": "2026-10-31T19:30:00.000Z",
-   "gid": 401871095,
-   "team": "UL Monroe",
-   "line": 3.5
+   "game": "Baylor @ UCF",
+   "pick": "UCF +1.5",
+   "edge": 2.0,
+   "start": "2026-10-30T23:30:00.000Z",
+   "gid": 401856844,
+   "team": "UCF",
+   "line": 1.5
   }
  ],
  "ml": [
   {
-   "game": "Wisconsin @ Iowa",
-   "pick": "Wisconsin +142",
-   "ev": 19.7,
-   "p": 49,
-   "start": "2026-10-31T16:00:00.000Z",
-   "gid": 401858502,
-   "team": "Wisconsin",
-   "ml": 142
-  },
-  {
    "game": "California @ NC State",
    "pick": "California +260",
-   "ev": 19.1,
-   "p": 33,
+   "ev": 16.3,
+   "p": 32,
    "start": "2026-10-31T16:00:00.000Z",
    "gid": 401858277,
    "team": "California",
    "ml": 260
   },
   {
-   "game": "South Carolina @ Oklahoma",
-   "pick": "South Carolina +164",
-   "ev": 11.9,
-   "p": 42,
-   "start": "2026-10-31T20:15:00.000Z",
-   "gid": 401856736,
-   "team": "South Carolina",
-   "ml": 164
-  },
-  {
    "game": "Northwestern @ Oregon",
    "pick": "Northwestern +145",
-   "ev": 10.8,
+   "ev": 10.5,
    "p": 45,
    "start": "2026-10-31T19:30:00.000Z",
    "gid": 401858505,
@@ -118,30 +98,50 @@
   },
   {
    "game": "Southern Miss @ UL Monroe",
-   "pick": "UL Monroe +142",
-   "ev": 9.0,
+   "pick": "UL Monroe +145",
+   "ev": 10.3,
    "p": 45,
    "start": "2026-10-31T19:30:00.000Z",
    "gid": 401871095,
    "team": "UL Monroe",
+   "ml": 145
+  },
+  {
+   "game": "Wisconsin @ Iowa",
+   "pick": "Wisconsin +114",
+   "ev": 9.9,
+   "p": 51,
+   "start": "2026-10-31T16:00:00.000Z",
+   "gid": 401858502,
+   "team": "Wisconsin",
+   "ml": 114
+  },
+  {
+   "game": "South Carolina @ Oklahoma",
+   "pick": "South Carolina +142",
+   "ev": 8.1,
+   "p": 45,
+   "start": "2026-10-31T20:15:00.000Z",
+   "gid": 401856736,
+   "team": "South Carolina",
    "ml": 142
   }
  ],
  "td": [
   {
-   "player": "Jahiem White",
-   "team": "North Texas",
-   "game": "Florida Atlantic @ North Texas",
-   "p": 85,
-   "fair": "-559",
-   "gid": 401862812
+   "player": "Nate Sheppard",
+   "team": "Duke",
+   "game": "Boston College @ Duke",
+   "p": 81,
+   "fair": "-419",
+   "gid": 401858279
   },
   {
    "player": "Eli Wood",
    "team": "Utah State",
    "game": "Colorado State @ Utah State",
    "p": 81,
-   "fair": "-431",
+   "fair": "-435",
    "gid": 401860910
   },
   {
@@ -149,23 +149,15 @@
    "team": "UCLA",
    "game": "Nevada @ UCLA",
    "p": 81,
-   "fair": "-427",
+   "fair": "-417",
    "gid": 401858508
-  },
-  {
-   "player": "Nate Sheppard",
-   "team": "Duke",
-   "game": "Boston College @ Duke",
-   "p": 80,
-   "fair": "-411",
-   "gid": 401858279
   },
   {
    "player": "Cale Hellums",
    "team": "Army",
    "game": "Army @ Memphis",
    "p": 79,
-   "fair": "-377",
+   "fair": "-387",
    "gid": 401862814
   },
   {
@@ -173,7 +165,7 @@
    "team": "Illinois",
    "game": "Illinois @ Maryland",
    "p": 75,
-   "fair": "-302",
+   "fair": "-303",
    "gid": 401858503
   },
   {
@@ -181,7 +173,7 @@
    "team": "Boise State",
    "game": "Texas State @ Boise State",
    "p": 75,
-   "fair": "-306",
+   "fair": "-302",
    "gid": 401860908
   },
   {
@@ -189,7 +181,7 @@
    "team": "UNLV",
    "game": "Northern Illinois @ UNLV",
    "p": 75,
-   "fair": "-300",
+   "fair": "-307",
    "gid": 401864530
   },
   {
@@ -197,7 +189,7 @@
    "team": "Notre Dame",
    "game": "Notre Dame @ Navy",
    "p": 73,
-   "fair": "-273",
+   "fair": "-270",
    "gid": 401859185
   },
   {
@@ -209,20 +201,20 @@
    "gid": 401858283
   },
   {
+   "player": "Jesse Legree",
+   "team": "Oregon State",
+   "game": "Oregon State @ Fresno State",
+   "p": 73,
+   "fair": "-268",
+   "gid": 401860924
+  },
+  {
    "player": "Wayshawn Parker",
    "team": "Utah",
    "game": "Utah @ Cincinnati",
    "p": 72,
-   "fair": "-254",
+   "fair": "-256",
    "gid": 401856848
-  },
-  {
-   "player": "Jesse Legree",
-   "team": "Oregon State",
-   "game": "Oregon State @ Fresno State",
-   "p": 72,
-   "fair": "-259",
-   "gid": 401860924
   },
   {
    "player": "Steven Robinson",
@@ -236,8 +228,8 @@
    "player": "Ashton Daniels",
    "team": "Florida State",
    "game": "Clemson @ Florida State",
-   "p": 70,
-   "fair": "-238",
+   "p": 71,
+   "fair": "-244",
    "gid": 401858280
   },
   {
@@ -247,89 +239,24 @@
    "p": 69,
    "fair": "-221",
    "gid": 401858509
+  },
+  {
+   "player": "Jai'Den Thomas",
+   "team": "UNLV",
+   "game": "Northern Illinois @ UNLV",
+   "p": 69,
+   "fair": "-222",
+   "gid": 401864530
   }
  ],
  "cheats": [
   {
-   "game": "Kennesaw State @ Middle Tennessee",
-   "start": "2026-10-28T23:00:00.000Z",
-   "line": "Middle Tennessee -2.5",
-   "total": 50.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Jacksonville State @ New Mexico State",
-   "start": "2026-10-29T00:00:00.000Z",
-   "line": "Jacksonville State -3.0",
-   "total": 49.5,
-   "codes": [
-    "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Troy @ James Madison",
-   "start": "2026-10-29T23:30:00.000Z",
-   "line": "James Madison -21",
-   "total": 49.5,
-   "codes": [
-    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
-   ]
-  },
-  {
-   "game": "Florida Atlantic @ North Texas",
-   "start": "2026-10-29T23:30:00.000Z",
-   "line": "North Texas -13.5",
-   "total": 77.5,
-   "codes": [
-    "Shootout total: both offenses get a TD bump."
-   ]
-  },
-  {
    "game": "Baylor @ UCF",
    "start": "2026-10-30T23:30:00.000Z",
-   "line": "UCF -1.5",
-   "total": 47.5,
+   "line": "Baylor -1.5",
+   "total": 48.0,
    "codes": [
     "Toss-up: the moneyline price matters more than the side."
-   ]
-  },
-  {
-   "game": "Wisconsin @ Iowa",
-   "start": "2026-10-31T16:00:00.000Z",
-   "line": "Iowa -3.5",
-   "total": 36.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Model and market split by 9 pts: trust the market first."
-   ]
-  },
-  {
-   "game": "Notre Dame @ Navy",
-   "start": "2026-10-31T16:00:00.000Z",
-   "line": "Notre Dame -30.5",
-   "total": 57.0,
-   "codes": [
-    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
-   ]
-  },
-  {
-   "game": "Bowling Green @ Western Michigan",
-   "start": "2026-10-31T16:00:00.000Z",
-   "line": "Western Michigan -13.5",
-   "total": 44.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
-   ]
-  },
-  {
-   "game": "UAB @ South Florida",
-   "start": "2026-10-31T16:00:00.000Z",
-   "line": "South Florida -8.0",
-   "total": 42.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
    ]
   },
   {
@@ -342,9 +269,56 @@
    ]
   },
   {
+   "game": "Wisconsin @ Iowa",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "Iowa -2.5",
+   "total": 36.5,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
+    "Toss-up: the moneyline price matters more than the side.",
+    "Model and market split by 8 pts: trust the market first."
+   ]
+  },
+  {
+   "game": "Bowling Green @ Western Michigan",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "Western Michigan -13.5",
+   "total": 44.5,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs."
+   ]
+  },
+  {
+   "game": "Notre Dame @ Navy",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "Notre Dame -30.5",
+   "total": 56.5,
+   "codes": [
+    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
+   ]
+  },
+  {
+   "game": "UAB @ South Florida",
+   "start": "2026-10-31T16:00:00.000Z",
+   "line": "South Florida -8.0",
+   "total": 42.0,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs."
+   ]
+  },
+  {
+   "game": "Michigan @ Rutgers",
+   "start": "2026-10-31T16:30:00.000Z",
+   "line": "Michigan -16.5",
+   "total": 45.5,
+   "codes": [
+    "Model and market split by 6 pts: trust the market first."
+   ]
+  },
+  {
    "game": "Marshall @ Old Dominion",
    "start": "2026-10-31T17:00:00.000Z",
-   "line": "Marshall -2.5",
+   "line": "Marshall -3.0",
    "total": 45.0,
    "codes": [
     "Grinder: points are scarce, rushing TDs beat receiving TDs.",
@@ -354,8 +328,8 @@
   {
    "game": "Kansas State @ Colorado",
    "start": "2026-10-31T18:00:00.000Z",
-   "line": "Kansas State -1.5",
-   "total": 47.5,
+   "line": "Colorado -1.5",
+   "total": 46.5,
    "codes": [
     "Toss-up: the moneyline price matters more than the side."
    ]
@@ -379,22 +353,12 @@
    ]
   },
   {
-   "game": "UTEP @ North Dakota State",
+   "game": "Arizona State @ BYU",
    "start": "2026-10-31T19:30:00.000Z",
-   "line": "North Dakota State -24.5",
-   "total": 42.5,
+   "line": "BYU -16.5",
+   "total": 48.5,
    "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
-   ]
-  },
-  {
-   "game": "Florida International @ Liberty",
-   "start": "2026-10-31T19:30:00.000Z",
-   "line": "Liberty -14",
-   "total": 44.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs."
+    "Model and market split by 6 pts: trust the market first."
    ]
   },
   {
@@ -407,21 +371,22 @@
    ]
   },
   {
-   "game": "Arizona State @ BYU",
-   "start": "2026-10-31T19:30:00.000Z",
-   "line": "BYU -16.0",
-   "total": 48.5,
-   "codes": [
-    "Model and market split by 7 pts: trust the market first."
-   ]
-  },
-  {
    "game": "Colorado State @ Utah State",
    "start": "2026-10-31T19:30:00.000Z",
    "line": "Utah State -6.5",
    "total": 63.5,
    "codes": [
     "Shootout total: both offenses get a TD bump."
+   ]
+  },
+  {
+   "game": "UTEP @ North Dakota State",
+   "start": "2026-10-31T19:30:00.000Z",
+   "line": "North Dakota State -24.5",
+   "total": 43.5,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
+    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
    ]
   },
   {
@@ -434,22 +399,22 @@
    ]
   },
   {
-   "game": "Nevada @ UCLA",
-   "start": "2026-10-31T20:15:00.000Z",
-   "line": "UCLA -22.5",
-   "total": 44.5,
-   "codes": [
-    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
-    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
-   ]
-  },
-  {
    "game": "South Carolina @ Oklahoma",
    "start": "2026-10-31T20:15:00.000Z",
-   "line": "Oklahoma -4.5",
+   "line": "Oklahoma -3.5",
    "total": 44.5,
    "codes": [
     "Grinder: points are scarce, rushing TDs beat receiving TDs."
+   ]
+  },
+  {
+   "game": "Nevada @ UCLA",
+   "start": "2026-10-31T20:15:00.000Z",
+   "line": "UCLA -22.5",
+   "total": 43.5,
+   "codes": [
+    "Grinder: points are scarce, rushing TDs beat receiving TDs.",
+    "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
    ]
   },
   {
@@ -473,17 +438,17 @@
   {
    "game": "Georgia Tech @ Pittsburgh",
    "start": "2026-10-31T23:30:00.000Z",
-   "line": "Pittsburgh -7.5",
+   "line": "Pittsburgh -8.5",
    "total": 54.5,
    "codes": [
-    "Model and market split by 9 pts: trust the market first."
+    "Model and market split by 8 pts: trust the market first."
    ]
   },
   {
    "game": "Washington @ Nebraska",
    "start": "2026-11-01T00:00:00.000Z",
    "line": "Nebraska -7.5",
-   "total": 50.0,
+   "total": 50.5,
    "codes": [
     "Model and market split by 12 pts: trust the market first."
    ]
@@ -491,7 +456,7 @@
   {
    "game": "Texas State @ Boise State",
    "start": "2026-11-01T02:00:00.000Z",
-   "line": "Boise State -11.5",
+   "line": "Boise State -10.5",
    "total": 63.5,
    "codes": [
     "Shootout total: both offenses get a TD bump."
@@ -501,7 +466,7 @@
    "game": "Northern Illinois @ UNLV",
    "start": "2026-11-01T02:30:00.000Z",
    "line": "UNLV -23.5",
-   "total": 53.5,
+   "total": 54.5,
    "codes": [
     "Blowout risk: backups get garbage-time carries, and big spreads are coin flips."
    ]
