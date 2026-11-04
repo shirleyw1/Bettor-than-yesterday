@@ -1229,7 +1229,7 @@
   "team": "Buffalo",
   "line": 6.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "10|spread|401866457",
@@ -1284,7 +1284,7 @@
   "team": "Buffalo",
   "line": null,
   "ml": 190,
-  "result": null
+  "result": "W"
  },
  {
   "k": "10|td|401862817|A'Marion Peterson",
@@ -1392,6 +1392,171 @@
   "gid": 401864533,
   "pick": "Scottre Humphrey",
   "team": "New Mexico",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|spread|401856742",
+  "week": 10,
+  "type": "spread",
+  "gid": 401856742,
+  "pick": "Mississippi State -3",
+  "team": "Mississippi State",
+  "line": -3.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|spread|401870795",
+  "week": 10,
+  "type": "spread",
+  "gid": 401870795,
+  "pick": "Liberty -16.5",
+  "team": "Liberty",
+  "line": -16.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|spread|401862818",
+  "week": 10,
+  "type": "spread",
+  "gid": 401862818,
+  "pick": "South Florida +2.5",
+  "team": "South Florida",
+  "line": 2.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|spread|401869945",
+  "week": 10,
+  "type": "spread",
+  "gid": 401869945,
+  "pick": "Coastal Carolina -7",
+  "team": "Coastal Carolina",
+  "line": -7.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|ml|401856742",
+  "week": 10,
+  "type": "ml",
+  "gid": 401856742,
+  "pick": "Mississippi State -155",
+  "team": "Mississippi State",
+  "line": null,
+  "ml": -155,
+  "result": null
+ },
+ {
+  "k": "10|ml|401856741",
+  "week": 10,
+  "type": "ml",
+  "gid": 401856741,
+  "pick": "Ole Miss +145",
+  "team": "Ole Miss",
+  "line": null,
+  "ml": 145,
+  "result": null
+ },
+ {
+  "k": "10|ml|401856744",
+  "week": 10,
+  "type": "ml",
+  "gid": 401856744,
+  "pick": "Texas A&M +235",
+  "team": "Texas A&M",
+  "line": null,
+  "ml": 235,
+  "result": null
+ },
+ {
+  "k": "10|td|401858286|Nate Sheppard",
+  "week": 10,
+  "type": "td",
+  "gid": 401858286,
+  "pick": "Nate Sheppard",
+  "team": "Duke",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401862821|Jahiem White",
+  "week": 10,
+  "type": "td",
+  "gid": 401862821,
+  "pick": "Jahiem White",
+  "team": "North Texas",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401862820|Jackson Gutierrez",
+  "week": 10,
+  "type": "td",
+  "gid": 401862820,
+  "pick": "Jackson Gutierrez",
+  "team": "Navy",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401858515|Fame Ijeboi",
+  "week": 10,
+  "type": "td",
+  "gid": 401858515,
+  "pick": "Fame Ijeboi",
+  "team": "Purdue",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401860912|Jesse Legree",
+  "week": 10,
+  "type": "td",
+  "gid": 401860912,
+  "pick": "Jesse Legree",
+  "team": "Oregon State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401860911|Dylan Riley",
+  "week": 10,
+  "type": "td",
+  "gid": 401860911,
+  "pick": "Dylan Riley",
+  "team": "Boise State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401858292|Demon June",
+  "week": 10,
+  "type": "td",
+  "gid": 401858292,
+  "pick": "Demon June",
+  "team": "North Carolina",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|td|401856738|Byrum Brown",
+  "week": 10,
+  "type": "td",
+  "gid": 401856738,
+  "pick": "Byrum Brown",
+  "team": "Auburn",
   "line": null,
   "ml": null,
   "result": null
