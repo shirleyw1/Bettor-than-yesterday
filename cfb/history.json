@@ -1240,7 +1240,7 @@
   "team": "Sacramento State",
   "line": 27.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "10|spread|401856849",
@@ -1295,7 +1295,7 @@
   "team": "UTSA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "10|td|401862823|Cale Hellums",
@@ -1339,7 +1339,7 @@
   "team": "Florida Atlantic",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "10|td|401856745|DeSean Bishop",
@@ -1372,7 +1372,7 @@
   "team": "Toledo",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "10|td|401856849|Wayshawn Parker",
@@ -1557,6 +1557,50 @@
   "gid": 401856738,
   "pick": "Byrum Brown",
   "team": "Auburn",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|spread|401858515",
+  "week": 10,
+  "type": "spread",
+  "gid": 401858515,
+  "pick": "Purdue -5.5",
+  "team": "Purdue",
+  "line": -5.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "10|ml|401858291",
+  "week": 10,
+  "type": "ml",
+  "gid": 401858291,
+  "pick": "Miami +225",
+  "team": "Miami",
+  "line": null,
+  "ml": 225,
+  "result": null
+ },
+ {
+  "k": "10|ml|401869927",
+  "week": 10,
+  "type": "ml",
+  "gid": 401869927,
+  "pick": "Georgia State +190",
+  "team": "Georgia State",
+  "line": null,
+  "ml": 190,
+  "result": null
+ },
+ {
+  "k": "10|td|401858289|Ashton Daniels",
+  "week": 10,
+  "type": "td",
+  "gid": 401858289,
+  "pick": "Ashton Daniels",
+  "team": "Florida State",
   "line": null,
   "ml": null,
   "result": null
