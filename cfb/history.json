@@ -1647,7 +1647,7 @@
   "team": "Western Michigan",
   "line": -14.0,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|spread|401856860",
@@ -1799,6 +1799,72 @@
   "gid": 401870796,
   "pick": "Isaiah Myers",
   "team": "Missouri State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|spread|401860917",
+  "week": 11,
+  "type": "spread",
+  "gid": 401860917,
+  "pick": "Colorado State +9.5",
+  "team": "Colorado State",
+  "line": 9.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|spread|401858522",
+  "week": 11,
+  "type": "spread",
+  "gid": 401858522,
+  "pick": "Northwestern +12.5",
+  "team": "Northwestern",
+  "line": 12.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|ml|401858521",
+  "week": 11,
+  "type": "ml",
+  "gid": 401858521,
+  "pick": "Michigan State +172",
+  "team": "Michigan State",
+  "line": null,
+  "ml": 172,
+  "result": null
+ },
+ {
+  "k": "11|ml|401860917",
+  "week": 11,
+  "type": "ml",
+  "gid": 401860917,
+  "pick": "Colorado State +285",
+  "team": "Colorado State",
+  "line": null,
+  "ml": 285,
+  "result": null
+ },
+ {
+  "k": "11|ml|401856887",
+  "week": 11,
+  "type": "ml",
+  "gid": 401856887,
+  "pick": "Ole Miss -112",
+  "team": "Ole Miss",
+  "line": null,
+  "ml": -112,
+  "result": null
+ },
+ {
+  "k": "11|td|401862826|Easton Messer",
+  "week": 11,
+  "type": "td",
+  "gid": 401862826,
+  "pick": "Easton Messer",
+  "team": "Florida Atlantic",
   "line": null,
   "ml": null,
   "result": null
