@@ -1868,5 +1868,27 @@
   "line": null,
   "ml": null,
   "result": null
+ },
+ {
+  "k": "11|spread|401856887",
+  "week": 11,
+  "type": "spread",
+  "gid": 401856887,
+  "pick": "Ole Miss +1.5",
+  "team": "Ole Miss",
+  "line": 1.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|ml|401856888",
+  "week": 11,
+  "type": "ml",
+  "gid": 401856888,
+  "pick": "Tennessee -135",
+  "team": "Tennessee",
+  "line": null,
+  "ml": -135,
+  "result": null
  }
 ]
