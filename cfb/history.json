@@ -1658,7 +1658,7 @@
   "team": "Houston",
   "line": -10.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401860916",
@@ -1735,7 +1735,7 @@
   "team": "UCLA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401858296|Nate Sheppard",
@@ -1889,6 +1889,61 @@
   "team": "Tennessee",
   "line": null,
   "ml": -135,
+  "result": null
+ },
+ {
+  "k": "11|spread|401864536",
+  "week": 11,
+  "type": "spread",
+  "gid": 401864536,
+  "pick": "Nevada -6",
+  "team": "Nevada",
+  "line": -6.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|spread|401856888",
+  "week": 11,
+  "type": "spread",
+  "gid": 401856888,
+  "pick": "Tennessee -1.5",
+  "team": "Tennessee",
+  "line": -1.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|spread|401871099",
+  "week": 11,
+  "type": "spread",
+  "gid": 401871099,
+  "pick": "Louisiana Tech -17.5",
+  "team": "Louisiana Tech",
+  "line": -17.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|td|401856884|Jadan Baugh",
+  "week": 11,
+  "type": "td",
+  "gid": 401856884,
+  "pick": "Jadan Baugh",
+  "team": "Florida",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "11|td|401856886|Byrum Brown",
+  "week": 11,
+  "type": "td",
+  "gid": 401856886,
+  "pick": "Byrum Brown",
+  "team": "Auburn",
+  "line": null,
+  "ml": null,
   "result": null
  }
 ]
