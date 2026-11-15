@@ -1614,7 +1614,7 @@
   "team": "North Dakota State",
   "line": -8.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|spread|401856889",
@@ -1625,7 +1625,7 @@
   "team": "Alabama",
   "line": -19.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|spread|401856857",
@@ -1636,7 +1636,7 @@
   "team": "UCF",
   "line": -3.0,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|spread|401866458",
@@ -1669,7 +1669,7 @@
   "team": "Fresno State",
   "line": null,
   "ml": 285,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401861967",
@@ -1680,7 +1680,7 @@
   "team": "James Madison",
   "line": null,
   "ml": -142,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401860915",
@@ -1691,7 +1691,7 @@
   "team": "Utah State",
   "line": null,
   "ml": -130,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401856861|Michael Hawkins Jr.",
@@ -1702,7 +1702,7 @@
   "team": "West Virginia",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401862827|Jahiem White",
@@ -1713,7 +1713,7 @@
   "team": "North Texas",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401862827|A'Marion Peterson",
@@ -1724,7 +1724,7 @@
   "team": "UTSA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401858526|Wayne Knight",
@@ -1746,7 +1746,7 @@
   "team": "Duke",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401858294|Nolan James Jr.",
@@ -1757,7 +1757,7 @@
   "team": "Notre Dame",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401860914|Dylan Riley",
@@ -1768,7 +1768,7 @@
   "team": "Boise State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401864539|Scottre Humphrey",
@@ -1779,7 +1779,7 @@
   "team": "New Mexico",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401858297|Gideon Davidson",
@@ -1790,7 +1790,7 @@
   "team": "Clemson",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401870796|Isaiah Myers",
@@ -1801,7 +1801,7 @@
   "team": "Missouri State",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|spread|401860917",
@@ -1812,7 +1812,7 @@
   "team": "Colorado State",
   "line": 9.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|spread|401858522",
@@ -1823,7 +1823,7 @@
   "team": "Northwestern",
   "line": 12.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|ml|401858521",
@@ -1834,7 +1834,7 @@
   "team": "Michigan State",
   "line": null,
   "ml": 172,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401860917",
@@ -1845,7 +1845,7 @@
   "team": "Colorado State",
   "line": null,
   "ml": 285,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401856887",
@@ -1867,7 +1867,7 @@
   "team": "Florida Atlantic",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|spread|401856887",
@@ -1889,7 +1889,7 @@
   "team": "Tennessee",
   "line": null,
   "ml": -135,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|spread|401864536",
@@ -1900,7 +1900,7 @@
   "team": "Nevada",
   "line": -6.0,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|spread|401856888",
@@ -1911,7 +1911,7 @@
   "team": "Tennessee",
   "line": -1.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|spread|401871099",
@@ -1922,7 +1922,7 @@
   "team": "Louisiana Tech",
   "line": -17.5,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401856884|Jadan Baugh",
@@ -1933,7 +1933,7 @@
   "team": "Florida",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "11|td|401856886|Byrum Brown",
@@ -1942,6 +1942,204 @@
   "gid": 401856886,
   "pick": "Byrum Brown",
   "team": "Auburn",
+  "line": null,
+  "ml": null,
+  "result": "W"
+ },
+ {
+  "k": "12|spread|401858530",
+  "week": 12,
+  "type": "spread",
+  "gid": 401858530,
+  "pick": "Northwestern -3",
+  "team": "Northwestern",
+  "line": -3.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401866467",
+  "week": 12,
+  "type": "spread",
+  "gid": 401866467,
+  "pick": "Massachusetts -3",
+  "team": "Massachusetts",
+  "line": -3.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401858302",
+  "week": 12,
+  "type": "spread",
+  "gid": 401858302,
+  "pick": "Miami -19.5",
+  "team": "Miami",
+  "line": -19.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401871080",
+  "week": 12,
+  "type": "spread",
+  "gid": 401871080,
+  "pick": "Liberty -14.5",
+  "team": "Liberty",
+  "line": -14.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401858305",
+  "week": 12,
+  "type": "spread",
+  "gid": 401858305,
+  "pick": "North Carolina +1.5",
+  "team": "North Carolina",
+  "line": 1.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|ml|401858530",
+  "week": 12,
+  "type": "ml",
+  "gid": 401858530,
+  "pick": "Northwestern -142",
+  "team": "Northwestern",
+  "line": null,
+  "ml": -142,
+  "result": null
+ },
+ {
+  "k": "12|ml|401866467",
+  "week": 12,
+  "type": "ml",
+  "gid": 401866467,
+  "pick": "Massachusetts -148",
+  "team": "Massachusetts",
+  "line": null,
+  "ml": -148,
+  "result": null
+ },
+ {
+  "k": "12|ml|401869958",
+  "week": 12,
+  "type": "ml",
+  "gid": 401869958,
+  "pick": "Georgia State -118",
+  "team": "Georgia State",
+  "line": null,
+  "ml": -118,
+  "result": null
+ },
+ {
+  "k": "12|td|401858303|Nate Sheppard",
+  "week": 12,
+  "type": "td",
+  "gid": 401858303,
+  "pick": "Nate Sheppard",
+  "team": "Duke",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401862834|Jackson Gutierrez",
+  "week": 12,
+  "type": "td",
+  "gid": 401862834,
+  "pick": "Jackson Gutierrez",
+  "team": "Navy",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401856868|Michael Hawkins Jr.",
+  "week": 12,
+  "type": "td",
+  "gid": 401856868,
+  "pick": "Michael Hawkins Jr.",
+  "team": "West Virginia",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401858308|Micah Ford",
+  "week": 12,
+  "type": "td",
+  "gid": 401858308,
+  "pick": "Micah Ford",
+  "team": "Stanford",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401856748|Jadan Baugh",
+  "week": 12,
+  "type": "td",
+  "gid": 401856748,
+  "pick": "Jadan Baugh",
+  "team": "Florida",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401862836|A'Marion Peterson",
+  "week": 12,
+  "type": "td",
+  "gid": 401862836,
+  "pick": "A'Marion Peterson",
+  "team": "UTSA",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401862835|Jahiem White",
+  "week": 12,
+  "type": "td",
+  "gid": 401862835,
+  "pick": "Jahiem White",
+  "team": "North Texas",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401862831|Cale Hellums",
+  "week": 12,
+  "type": "td",
+  "gid": 401862831,
+  "pick": "Cale Hellums",
+  "team": "Army",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401862833|Easton Messer",
+  "week": 12,
+  "type": "td",
+  "gid": 401862833,
+  "pick": "Easton Messer",
+  "team": "Florida Atlantic",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401858304|Ashton Daniels",
+  "week": 12,
+  "type": "td",
+  "gid": 401858304,
+  "pick": "Ashton Daniels",
+  "team": "Florida State",
   "line": null,
   "ml": null,
   "result": null
