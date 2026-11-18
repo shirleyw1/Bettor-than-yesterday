@@ -1856,7 +1856,7 @@
   "team": "Ole Miss",
   "line": null,
   "ml": -112,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|td|401862826|Easton Messer",
@@ -1878,7 +1878,7 @@
   "team": "Ole Miss",
   "line": 1.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "11|ml|401856888",
@@ -2140,6 +2140,39 @@
   "gid": 401858304,
   "pick": "Ashton Daniels",
   "team": "Florida State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401858528",
+  "week": 12,
+  "type": "spread",
+  "gid": 401858528,
+  "pick": "UCLA -3.5",
+  "team": "UCLA",
+  "line": -3.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|ml|401856752",
+  "week": 12,
+  "type": "ml",
+  "gid": 401856752,
+  "pick": "Texas A&M +245",
+  "team": "Texas A&M",
+  "line": null,
+  "ml": 245,
+  "result": null
+ },
+ {
+  "k": "12|td|401860918|Bryson Donelson",
+  "week": 12,
+  "type": "td",
+  "gid": 401860918,
+  "pick": "Bryson Donelson",
+  "team": "Fresno State",
   "line": null,
   "ml": null,
   "result": null
