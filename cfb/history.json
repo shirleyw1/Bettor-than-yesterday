@@ -1966,7 +1966,7 @@
   "team": "Massachusetts",
   "line": -3.0,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "12|spread|401858302",
@@ -2021,7 +2021,7 @@
   "team": "Massachusetts",
   "line": null,
   "ml": -148,
-  "result": null
+  "result": "L"
  },
  {
   "k": "12|ml|401869958",
@@ -2175,6 +2175,28 @@
   "team": "Fresno State",
   "line": null,
   "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401869958",
+  "week": 12,
+  "type": "spread",
+  "gid": 401869958,
+  "pick": "Georgia State +3",
+  "team": "Georgia State",
+  "line": 3.0,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|ml|401858527",
+  "week": 12,
+  "type": "ml",
+  "gid": 401858527,
+  "pick": "Illinois +260",
+  "team": "Illinois",
+  "line": null,
+  "ml": 260,
   "result": null
  }
 ]
