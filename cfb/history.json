@@ -2043,7 +2043,7 @@
   "team": "Duke",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "W"
  },
  {
   "k": "12|td|401862834|Jackson Gutierrez",
@@ -2197,6 +2197,116 @@
   "team": "Illinois",
   "line": null,
   "ml": 260,
+  "result": null
+ },
+ {
+  "k": "12|spread|401856871",
+  "week": 12,
+  "type": "spread",
+  "gid": 401856871,
+  "pick": "Baylor +5.5",
+  "team": "Baylor",
+  "line": 5.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|spread|401856870",
+  "week": 12,
+  "type": "spread",
+  "gid": 401856870,
+  "pick": "Oklahoma State -2.5",
+  "team": "Oklahoma State",
+  "line": -2.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|ml|401856870",
+  "week": 12,
+  "type": "ml",
+  "gid": 401856870,
+  "pick": "Oklahoma State -135",
+  "team": "Oklahoma State",
+  "line": null,
+  "ml": -135,
+  "result": null
+ },
+ {
+  "k": "12|ml|401858528",
+  "week": 12,
+  "type": "ml",
+  "gid": 401858528,
+  "pick": "UCLA -180",
+  "team": "UCLA",
+  "line": null,
+  "ml": -180,
+  "result": null
+ },
+ {
+  "k": "12|td|401860925|Dylan Riley",
+  "week": 12,
+  "type": "td",
+  "gid": 401860925,
+  "pick": "Dylan Riley",
+  "team": "Boise State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401858307|Nolan James Jr.",
+  "week": 12,
+  "type": "td",
+  "gid": 401858307,
+  "pick": "Nolan James Jr.",
+  "team": "Notre Dame",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401860920|Davian Jackson",
+  "week": 12,
+  "type": "td",
+  "gid": 401860920,
+  "pick": "Davian Jackson",
+  "team": "Texas State",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401858302|Malachi Toney",
+  "week": 12,
+  "type": "td",
+  "gid": 401858302,
+  "pick": "Malachi Toney",
+  "team": "Miami",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401871101|Steven Robinson",
+  "week": 12,
+  "type": "td",
+  "gid": 401871101,
+  "pick": "Steven Robinson",
+  "team": "Southern Miss",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "12|td|401856755|Raleek Brown",
+  "week": 12,
+  "type": "td",
+  "gid": 401856755,
+  "pick": "Raleek Brown",
+  "team": "Texas",
+  "line": null,
+  "ml": null,
   "result": null
  }
 ]
