@@ -2506,5 +2506,27 @@
   "line": null,
   "ml": null,
   "result": null
+ },
+ {
+  "k": "13|ml|401858316",
+  "week": 13,
+  "type": "ml",
+  "gid": 401858316,
+  "pick": "Stanford +260",
+  "team": "Stanford",
+  "line": null,
+  "ml": 260,
+  "result": null
+ },
+ {
+  "k": "13|td|401856880|Wayshawn Parker",
+  "week": 13,
+  "type": "td",
+  "gid": 401856880,
+  "pick": "Wayshawn Parker",
+  "team": "Utah",
+  "line": null,
+  "ml": null,
+  "result": null
  }
 ]
