@@ -2329,7 +2329,7 @@
   "team": "Buffalo",
   "line": -8.5,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "13|spread|401862843",
@@ -2428,7 +2428,7 @@
   "team": "UTSA",
   "line": null,
   "ml": null,
-  "result": null
+  "result": "L"
  },
  {
   "k": "13|td|401862841|Cale Hellums",
@@ -2525,6 +2525,50 @@
   "gid": 401856880,
   "pick": "Wayshawn Parker",
   "team": "Utah",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "13|spread|401858538",
+  "week": 13,
+  "type": "spread",
+  "gid": 401858538,
+  "pick": "Purdue +23.5",
+  "team": "Purdue",
+  "line": 23.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "13|spread|401858537",
+  "week": 13,
+  "type": "spread",
+  "gid": 401858537,
+  "pick": "Northwestern -2.5",
+  "team": "Northwestern",
+  "line": -2.5,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "13|td|401858314|Nolan James Jr.",
+  "week": 13,
+  "type": "td",
+  "gid": 401858314,
+  "pick": "Nolan James Jr.",
+  "team": "Notre Dame",
+  "line": null,
+  "ml": null,
+  "result": null
+ },
+ {
+  "k": "13|td|401862837|Easton Messer",
+  "week": 13,
+  "type": "td",
+  "gid": 401862837,
+  "pick": "Easton Messer",
+  "team": "Florida Atlantic",
   "line": null,
   "ml": null,
   "result": null
